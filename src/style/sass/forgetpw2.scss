@@ -1,0 +1,29 @@
+@import 'common/common';
+@import 'common/mixin';
+
+#app {
+    padding: 10px;
+    position: relative;
+    @include login-bg;
+}
+
+.m-forget {
+    padding-top: 50vw;
+    .u-forget ::-webkit-input-placeholder {
+        color: #fff;
+    }
+    .u-forget input {
+        @include login-input;
+    }
+    button {
+        @include login-btn;
+    }
+}
+
+.m-header {
+    @include m-header;
+    .u-back {
+        @include u-back;
+    }
+    @include u-title;
+}

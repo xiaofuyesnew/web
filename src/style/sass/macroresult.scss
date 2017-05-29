@@ -1,0 +1,13 @@
+@import 'common/common';
+@import 'common/mixin';
+
+#app {
+    padding: 10px;
+    position: relative;
+    @include mr-bg;
+}
+
+.m-header {
+    @include m-header;
+    @include u-title;
+}

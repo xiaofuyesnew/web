@@ -1,0 +1,101 @@
+//登录页面背景
+@mixin login-bg {
+    background: url("../image/login-bg.png") no-repeat;
+    background-size: cover;
+}
+
+//宏观成果展示首页背景
+@mixin mr-bg {
+    background: url("../image/mr-bg.png") no-repeat;
+    background-size: cover;
+}
+
+//登录页面输入框
+@mixin login-input {
+    border-radius: 0;
+    display: block;
+    border: none;
+    outline: none;
+    background: none;
+    color: #fff;
+    margin: 0 auto;
+    font-size: 1.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .4);
+    height: 10vw;
+    width: 62vw;
+    padding: 1vw 2vw;
+}
+
+//登录页面验证码
+@mixin u-check {
+    .u-check {
+        width: 66vw;
+        margin: 0 auto;
+        padding-bottom: 15vw;
+        input[type="text"] {
+            height: 10vw;
+            width: 30vw;
+            padding: 1vw 2vw;
+            float: left;
+        }
+        img {
+            height: 10vw;
+            width: 20vw;
+            float: right;
+            padding-top: 2vw;
+        }
+        button {
+            margin: 4vw 0 0;
+            height: 8vw;
+            width: 30vw;
+            float: right;
+            background-color: #ff9a38;
+        }
+    }
+}
+
+//登录页面按钮
+@mixin login-btn {
+    display: block;
+    margin: 16vw auto 0;
+    outline: none;
+    border: none;
+    background: rgba(30, 130, 208, .8);
+    height: 10vw;
+    color: #fff;
+    border-radius: 10vw;
+    width: 66vw;
+    font-size: 1.4rem;
+}
+
+//共用头部
+@mixin m-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 15vw;
+    width: 100%;
+}
+
+@mixin u-back {
+    background: url("../image/back.png") no-repeat;
+    background-size: 100%;
+    height: 6vw;
+    width: 6vw;
+    margin: 9vw 0 0 5vw;
+    float: left;
+}
+
+@mixin u-title {
+    .u-title {
+        float: right;
+        height: 6vw;
+        line-height: 6vw;
+        width: 89vw;
+        margin-top: 9vw;
+        text-align: center;
+        text-indent: -11vw;
+        font-size: 1.6rem;
+        color: #fff;
+    }
+}
