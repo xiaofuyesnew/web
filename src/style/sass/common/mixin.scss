@@ -93,6 +93,7 @@
     left: 0;
     height: 60px;
     width: 100%;
+    z-index: 1;
 }
 
 @mixin u-back {
@@ -135,6 +136,7 @@
 
 @mixin m-navbar {
     .m-navbar {
+        background: #fff;
         list-style: none;
         position: fixed;
         border-top: 1px solid #1e82d0;
@@ -207,6 +209,7 @@
 @mixin m-main {
     .m-main {
         padding-top: 50px;
+        padding-bottom: 71px;
         width: 100%;
         .u-num {
             width: 100vw;

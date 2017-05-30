@@ -33,27 +33,66 @@ $(() => {
     app.setScreen()
     app.getNotice()
 
-    var ctxZ = $('#zPie')
-    var zPie = new Chart(ctxZ, {
-        type: 'pie',
-    data: {
-        labels: ["Red", "Blue", "Yellow"],
-        datasets: [{
-            data: [30, 40, 30],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)'
+    // 基于准备好的dom，初始化echarts实例
+    var zPie = echarts.init(document.getElementById('zPie'))
+    var cBar = echarts.init(document.getElementById('cBar'))
+    var zPieConf = {
+            series : [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius : '60%',
+                    center: ['50%', '50%'],
+                    data:[
+                        {value:335, name:'①镇'},
+                        {value:310, name:'②镇'},
+                        {value:234, name:'③镇'},
+                        {value:135, name:'④镇'},
+                        {value:1548, name:'⑤镇'}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
             ]
-        }]
-    },
-    options: {
-        legend: {
-            display: false
-        },
-        tooltip: {
-            intersect: false
         }
+    var cBarConf = {
+            legend: {
+                data: ['贫困户数', '贫困人口数']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.01],
+                position: 'top'
+            },
+            yAxis: {
+                type: 'category',
+                data: ['阳平镇','阳平镇','阳平镇','阳平镇','阳平镇','阳平镇']
+            },
+            series: [
+                {
+                    name: '贫困户数',
+                    type: 'bar',
+                    data: [123, 123, 123, 123, 456, 456]
+                },
+                {
+                    name: '贫困人口数',
+                    type: 'bar',
+                    data: [456, 456, 456, 456, 789, 789]
+                }
+            ]
     }
-    })
+
+    zPie.setOption(zPieConf)
+    cBar.setOption(cBarConf)
 })

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/accurate.css">
     <!-- build:js -->
     <script src="../lib/jquery-3.2.1.js"></script>
-    <script src="../lib/Chart.js"></script>
+    <script src="../lib/echarts.js"></script>
     <!-- endbuild -->
 </head>
 <body>
@@ -33,10 +33,11 @@
                     <span class="num">78</span>
                 </div>
             </div>
-            <div class="u-pie">
-                <div style="width: 200px;height:200px;">
-                <canvas id="zPie"></canvas>
-                </div>
+            <div class="u-block u-pie">
+                <div id="zPie"></div>
+            </div>
+            <div class="u-block u-bar">
+                <div id="cBar"></div>
             </div>
         </div>
         <ul class="m-navbar">
