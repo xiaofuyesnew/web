@@ -21,7 +21,9 @@ $(() => {
                 }
             } else {
                 $('.u-notice').css({
-
+                    'background': 'url("../../image/noticebell-nospot.png") no-repeat',
+                    'background-size': '28px',
+        'background-position': 'left center'
                 })
             }
         }
