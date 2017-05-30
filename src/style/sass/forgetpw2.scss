@@ -25,5 +25,9 @@
     .u-back {
         @include u-back;
     }
-    @include u-title;
+    .u-title {
+        @include u-title;
+        width: 89vw;
+        text-indent: -11vw;
+    }
 }

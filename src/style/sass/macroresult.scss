@@ -9,5 +9,21 @@
 
 .m-header {
     @include m-header;
-    @include u-title;
+    .u-title {
+        @include u-title;
+        width: 78vw;
+        margin-left: 11vw;
+    }
+    .u-notice {
+        @include u-notice;
+        .ntc-num {
+            display: block;
+            position: absolute;
+            top: 14px;
+            left: 18px;
+            color: #fff;
+            font-size: 1rem;
+
+        }
+    }
 }
