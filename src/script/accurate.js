@@ -12,7 +12,7 @@ $(() => {
                 $('.u-notice').css({
                     'background': 'url("../image/noticebell-spot.png") no-repeat',
                     'background-size': '28px',
-        'background-position': 'left center'
+        'background-position': '0 16px'
                 })
                 if (ntcNum > 9) {
                     $('.ntc-num').html('')
@@ -23,7 +23,7 @@ $(() => {
                 $('.u-notice').css({
                     'background': 'url("../../image/noticebell-nospot.png") no-repeat',
                     'background-size': '28px',
-        'background-position': 'left center'
+        'background-position': '0 16px'
                 })
             }
         }
