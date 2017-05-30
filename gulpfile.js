@@ -191,4 +191,15 @@ gulp.task('build', ['img', 'bundle', 'js', 'libcss', 'sass', 'index', 'html'])
 /** --- release end --- */
 
 
+/* --- copy to cordova www --- */
+gulp.task('copy', ['del:dist'], () => {
+    return gulp.src('./dist/**/*')
+        .pipe(gulp.dest('../webapp/www'))
+})
 
+gulp.task('del:dist', () => {
+    return del([
+        '../webapp/www/**/*'
+    ])
+})
+/* --- end copy --- */

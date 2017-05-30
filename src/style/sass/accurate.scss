@@ -4,11 +4,11 @@
 #app {
     padding: 10px;
     position: relative;
-    @include mar-bg;
 }
 
 .m-header {
     @include m-header;
+    background-color: #1e82d0;
     .u-title {
         @include u-title;
         width: 78vw;
@@ -24,4 +24,4 @@
 
 @include m-navbar;
 
-@include m-cards;
+@include m-main;

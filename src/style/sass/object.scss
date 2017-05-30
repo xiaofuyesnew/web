@@ -4,7 +4,7 @@
 #app {
     padding: 10px;
     position: relative;
-    @include mar-bg;
+    @include obj-bg;
 }
 
 .m-header {
@@ -25,3 +25,8 @@
 @include m-navbar;
 
 @include m-cards;
+
+.m-cards {
+    padding-top: 30px;
+    background: #fff;
+}

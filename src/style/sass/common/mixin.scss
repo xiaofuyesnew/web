@@ -5,8 +5,26 @@
 }
 
 //宏观成果展示首页背景
-@mixin mr-bg {
-    background: url("../image/mr-bg.png") no-repeat;
+@mixin mar-bg {
+    background: url("../image/mar-bg.png") no-repeat;
+    background-size: cover;
+}
+
+//微观成果展示首页背景
+@mixin mir-bg {
+    background: url("../image/mir-bg.png") no-repeat;
+    background-size: 100% auto;
+}
+
+//扶贫对象查看首页背景
+@mixin obj-bg {
+    background: url("../image/obj-bg.png") no-repeat;
+    background-size: 100% auto;
+}
+
+//政策扶贫动态首页背景
+@mixin act-bg {
+    background: url("../image/act-bg.png") no-repeat;
     background-size: cover;
 }
 
@@ -73,7 +91,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 40px;
+    height: 60px;
     width: 100%;
 }
 
@@ -107,5 +125,117 @@
 }
 
 @mixin ntc-num {
-    
+    display: block;
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    color: #fff;
+    font-size: 1rem;
+}
+
+@mixin m-navbar {
+    .m-navbar {
+        list-style: none;
+        position: fixed;
+        border-top: 1px solid #1e82d0;
+        padding-top: 10px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        li {
+            width: 20%;
+            float: left;
+            text-align: center;
+            a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                img {
+                    width: 40%;
+                    height: 40%;
+                }
+                span {
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                    color: #7f7f7f;
+                }
+                .blue {
+                    color: #1e82d0;
+                }
+            }
+        }
+    }
+}
+
+@mixin cards {
+    display: block;
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@mixin m-cards {
+    .m-cards {
+        padding: 0 10px;
+        position: absolute;
+        bottom: 71px;
+        left: 0;
+        width: calc(100% - 20px);
+        .cds-left {
+            @include cards;
+            float: left;
+            width: calc(50% - 5px);
+        }
+        .cds-right {
+            @include cards;
+            float: right;
+            width: calc(50% - 5px);
+        }
+        .cds-center {
+            @include cards;
+            width: 60%;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+//主要内容
+@mixin m-main {
+    .m-main {
+        padding-top: 50px;
+        width: 100%;
+        .u-num {
+            width: 100vw;
+            margin-left: -10px;
+            background: url("../image/accurate/num-bg.png") no-repeat;
+            background-size: 100vw auto;
+            height: 110px;
+            padding-bottom: 10px;
+            .unit {
+                width: 50vw;
+                height: 95px;
+                text-align: center;
+                padding-top: 15px;
+                .title {
+                    color: #fff;
+                    font-size: 1.6rem;
+                    line-height: 3.6rem;
+                }
+                .num {
+                    color: #00d2ff;
+                    font-size: 2.4rem;
+                }
+            }
+            .left {
+                float: left;
+            }
+            .right {
+                float: right;
+            }
+        }
+    }
 }

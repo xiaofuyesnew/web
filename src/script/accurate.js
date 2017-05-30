@@ -32,4 +32,28 @@ $(() => {
     //调用方法
     app.setScreen()
     app.getNotice()
+
+    var ctxZ = $('#zPie')
+    var zPie = new Chart(ctxZ, {
+        type: 'pie',
+    data: {
+        labels: ["Red", "Blue", "Yellow"],
+        datasets: [{
+            data: [30, 40, 30],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+            ]
+        }]
+    },
+    options: {
+        legend: {
+            display: false
+        },
+        tooltip: {
+            intersect: false
+        }
+    }
+    })
 })
