@@ -1,0 +1,68 @@
+@import 'common/common';
+@import 'common/mixin';
+
+#app {
+    padding: 10px;
+    background: #f5f5f5;
+    position: relative;
+}
+
+.m-header {
+    @include m-header;
+    background-color: #1e82d0;
+    .u-back {
+        @include u-back;
+    }
+    .u-title {
+        @include u-title;
+        width: 89vw;
+        text-indent: -11vw;
+    }
+}
+
+@include m-navbar;
+
+.m-navbar {
+    li {
+        width: calc( 100% / 3);
+        a {
+            img {
+                width: 30px!important;
+                height: 30px!important;
+            }
+        }
+    }
+}
+
+.subnav {
+    width: 100vw;
+    margin-left: -10px;
+    padding-top: 50px;
+    background: #fff;
+    height: 50px;
+    .unit {
+        padding-top: 10px;
+        width: calc(100% / 3);
+        float: left;
+        text-align: center;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    .blue {
+        color: #1e82d0;
+    }
+    .bar {
+        height: 2px;
+        background: #1e82d0;
+        width: 65%;
+        margin: 5px auto 0;
+    }
+}
+
+.m-main {
+    
+}
+
+.hide {
+    display: none;
+}
