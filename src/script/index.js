@@ -17,10 +17,27 @@ $(() => {
                     window.location = 'html/macroresult.html'
                 }, 5000)
             })
+        },
+        ajax: () => {
+            
         }
     }
 
     //调用方法
     app.setScreen()
     app.loadBtn()
+    app.ajax()
 })
+
+/*
+http://test.360guanggu.com/yuanan_fupin/api.php/Login/login?username=shenjiju&password=123456&code=1408
+登陆接口
+post
+
+http://test.360guanggu.com/yuanan_fupin/api.php/Login/get_code
+
+验证码接口
+get获取验证码
+post提交验证
+
+*/
