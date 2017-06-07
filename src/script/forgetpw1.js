@@ -37,3 +37,12 @@ $(() => {
     app.setScreen()
     app.loadBtn()
 })
+
+/**
+ * http://localhost/fupin/api.php/Login/add?username=shenjiju&mail=xxue495725835@163.com
+
+
+忘记密码发送验证码
+
+传回用户名和邮箱
+ */

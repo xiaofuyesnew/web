@@ -19,55 +19,15 @@
     }
 }
 
-.u-list {
-    list-style: none;
-    padding-top: 50px;
-    width: 100%;
-    li {
-        height: 50px;
-        width: 100%;
-        border-bottom: 1px solid #e2e2e2;
-        a {
-            display: block;
-            height: 50px;
-            width: 100%;
-        }
-    }
-    .left {
-        width: 50%;
-        height: 100%;
-        float: left;
-        .title {
-            font-size: 1.6rem;
-            color: #1f1f1f;
-            line-height: 50px;
-        }
-    }
-    .right {
-        width: 50%;
-        height: 100%;
-        float: right;
-        .info {
-            line-height: 25px;
-            display: block;
-            font-size: 1.4rem;
-            width: 100%;
-            text-align: right;
-            color: #7f7f7f;
-        }
-    }
-}
+@include m-navbar;
 
-.message {
-    padding-top: 50px;
-    .title {
-        font-size: 1.6rem;
-        text-align: center;
-        padding: 5px 0;
-    }
-    .detail {
-        font-size: 1.2rem;
-        text-indent: 2rem;
-        line-height: 1.8rem;
+.m-navbar {
+    li {
+        width: 50%;
+        height: 100%;
+        a img {
+            width: 32px;
+            height: 32px;
+        }
     }
 }

@@ -19,7 +19,13 @@ $(() => {
             })
         },
         ajax: () => {
-            
+            var api = 'http://test.360guanggu.com/yuanan_fupin/api.php/Login/get_code'
+            $('.u-check img').attr('src', api)
+            $('.u-check img').click(function () {
+                $.get(api, (data, status) => {
+                    console.log(status)
+                })
+            })
         }
     }
 
