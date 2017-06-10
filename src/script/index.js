@@ -23,7 +23,7 @@ $(() => {
             $('.u-check img').attr('src', api)
             $('.u-check img').click(function () {
                 $.get(api, (data, status) => {
-                    console.log(status)
+                    $('.u-check img').attr('src', api)
                 })
             })
         }
@@ -45,5 +45,17 @@ http://test.360guanggu.com/yuanan_fupin/api.php/Login/get_code
 验证码接口
 get获取验证码
 post提交验证
+
+
+
+
+精准识别 批次号和预警人数：http://localhost/fupin/api.php/Warn/index?user_id=6
+
+
+
+http://localhost/fupin/api.php/Warn/warning?user_id=6
+
+
+http://localhost/fupin/api.php/Warn/village?user_id=6
 
 */
