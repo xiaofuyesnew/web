@@ -96,3 +96,20 @@ $(() => {
     zPie.setOption(zPieConf)
     cBar.setOption(cBarConf)
 })
+
+
+
+/**
+ 
+ 
+
+
+精准识别 批次号和预警人数：http://test.360guanggu.com/yuanan_fupin/api.php/Warn/index?user_id=6
+
+
+
+http://test.360guanggu.com/yuanan_fupin/api.php/Warn/warning?user_id=6
+
+
+http://test.360guanggu.com/yuanan_fupin/api.php/Warn/village?user_id=6
+ */
