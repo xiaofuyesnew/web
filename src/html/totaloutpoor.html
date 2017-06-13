@@ -9,8 +9,11 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <title>总体脱贫改善</title>
     <link rel="stylesheet" href="../css/totaloutpoor.css">
+    <link rel="stylesheet" href="../lib/mobileSelect.css">
     <!-- build:js -->
     <script src="../lib/jquery-3.2.1.js"></script>
+    <script src="../lib/echarts.js"></script>
+    <script src="../lib/mobileSelect.js"></script>
     <!-- endbuild -->
 </head>
 <body>
@@ -20,33 +23,53 @@
             <div class="u-title">总体脱贫改善</div>
         </div>
         <div class="subnav">
-            <div class="unit blue">
+            <div class="unit blue" data-nav="1">
                 <span>脱贫人口</span>
                 <br>
                 <span>数量统计图</span>
                 <div class="bar"></div>
             </div>
-            <div class="unit">
-                <span>脱贫人口</span>
+            <div class="unit"  data-nav="2">
+                <span>不同收入档次</span>
                 <br>
-                <span>数量统计图</span>
+                <span>户数统计图</span>
                 <div class="bar hide"></div>
             </div>
-            <div class="unit">
-                <span>脱贫人口</span>
+            <div class="unit" data-nav="3">
+                <span>不同收入档次</span>
                 <br>
-                <span>数量统计图</span>
+                <span>收入来源统计图</span>
                 <div class="bar hide"></div>
             </div>
         </div>
         <div class="m-main">
-            <div class="">
-                
+            <div class="u-main">
+                <div class="unit">
+                    <div class="header">
+                        <div class="title">
+                            不同年份脱贫人口数量统计图
+                        </div>
+                        <div class="bar"></div>
+                        <a class="button">切换到户数</a>
+                    </div>
+                    <div  id="diffYear" class="content"></div>
+                </div>
+                <div class="unit hide">
+                    <div class="header">
+                        <div class="title">
+                            同一年份不同地域脱贫人口对比图
+                        </div>
+                        <div class="bar"></div>
+                        <a class="button">切换到人数</a>
+                    </div>
+                    <div id="diffArea" class="content"></div>
+                </div>
             </div>
-            <div class="hide">
-
+            <div class="u-main hide">
+                <div id="year">年份</div>
+                <div id="zhen">镇</div>
             </div>
-            <div class="hide">
+            <div class="u-main hide">
                 
             </div>
         </div>
@@ -71,6 +94,7 @@
             </li>
         </ul>
     </div>
+    
     <!-- build:cordova -->
     <!-- endbuild -->
     <script src="../js/totaloutpoor.js"></script>

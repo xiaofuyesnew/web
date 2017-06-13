@@ -40,6 +40,7 @@
     padding-top: 50px;
     background: #fff;
     height: 50px;
+    color: #7f7f7f;
     .unit {
         padding-top: 10px;
         width: calc(100% / 3);
@@ -60,7 +61,56 @@
 }
 
 .m-main {
-    
+    .u-main {
+        width: 100vw;
+        margin: 10px 0 0 -10px;
+        background-color: #fff;
+        .unit {
+            height: 540px;
+            .header {
+                height: 40px;
+                border-bottom: 1px solid #e2e2e2;
+                .title {
+                    padding-left: 20px;
+                    float: left;
+                    width: 70%;
+                    height: 100%;
+                    line-height: 40px;
+                    font-size: 1.6rem;
+                    font-weight: bold;
+                    color: #1c1c1c;
+                }
+                .bar {
+                    float: left;
+                    width: 1px;
+                    height: 30px;
+                    margin-top: 5px;
+                    background-color: #e2e2e2;
+                }
+                .button {
+                    float: left;
+                    display: block;
+                    width: calc(30% - 21px);
+                    height: 100%;
+                    color: #ff9a38;
+                    line-height: 40px;
+                    font-size: 1.2rem;
+                    background: url("../image/macroresult/shift.png") no-repeat 5px 50%;
+                    background-size: 15%;
+                    text-indent: 25px;
+                }
+            }
+            .content {
+                width: 100vw;
+                height: 500px;
+                padding-bottom: 71px;
+            }
+        }
+    }
+}
+
+.show {
+    display: block;
 }
 
 .hide {
