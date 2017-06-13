@@ -137,7 +137,18 @@ $(() => {
             {data: ['2013', '2014', '2015', '2016', '2017']}
         ],
         callback: (indexArr, data) => {
-            console.log(indexArr)
+             
+        }
+    })
+
+    var zhenSelect = new MobileSelect({
+        trigger: '#zhen',
+        title: '选择镇',
+        wheels: [
+            {data: ['不限', '凤鸣镇', '凤鸣镇', '凤鸣镇', '凤鸣镇', '凤鸣镇']}
+        ],
+        callback: (indexArr, data) => {
+             
         }
     })
 })
