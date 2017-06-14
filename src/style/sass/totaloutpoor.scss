@@ -190,41 +190,18 @@
                         background-size: 15%;
                         text-indent: 14px;
                     }
-                .triger {
-                    float: right;
-                    width: calc(30% - 31px);
-                    background: url("../image/macroresult/more.png") no-repeat right 50%;
-                    background-size: 10px;
-                    text-indent: 20px;
-                    margin-right: 10px;
-                    line-height: 41px;
-                    font-size: 1.2rem;//
-                    color: #7f7f7f;
+                    .triger {
+                        background: url("../image/macroresult/more.png") no-repeat right 50%;
+                        background-size: 6px;
+                        text-indent: 12px;
+                        font-size: 1.2rem;
+                    }
+                    .tr-w {
+                        text-indent: 4px;
+                    }
                 }
-                .tr-w {
-                    width: 30%;
-                    text-indent: 5px;
-                }
-            }
-            .content {
-                background-color: #fff;
-                width: 100vw;
-                height: 500px;
-                padding-bottom: 71px;
-            }
-            .content-s {
-                background-color: #fff;
-                width: 100vw;
-                height: 300px;
-            }
-            .pd-s {
-                padding-bottom: 71px;
-            }
-            .select {
-                width: 100vw;
-                border-bottom: 1px solid #e2e2e2;
-                height: 30px;
-                font-size: 1.4rem;
+                .select {
+                font-size: 1.2rem;
                 color: #7f7f7f;
                 line-height: 30px;
                 .name {

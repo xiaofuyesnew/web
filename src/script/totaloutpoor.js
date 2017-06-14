@@ -163,3 +163,13 @@ $(() => {
         }
     })
 })
+
+
+/**
+ * 不同年份脱贫人口数量统计图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/index     
+ * 获取年份：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/year    
+ * 同一年份不同地域脱贫人口对比图:http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/area?year=2017&town=河口乡
+同一年份不同收入档次户数分布图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/hushu
+不同年份各收入档次户数对比图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/hushu_nianfen?min=0&max=3000
+
+ */
