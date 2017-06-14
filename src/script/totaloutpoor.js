@@ -141,6 +141,17 @@ $(() => {
         }
     })
 
+    var yearSelect = new MobileSelect({
+        trigger: '#yearTwo',
+        title: '选择年份',
+        wheels: [
+            {data: ['2013', '2014', '2015', '2016', '2017']}
+        ],
+        callback: (indexArr, data) => {
+             
+        }
+    })
+
     var zhenSelect = new MobileSelect({
         trigger: '#zhen',
         title: '选择镇',

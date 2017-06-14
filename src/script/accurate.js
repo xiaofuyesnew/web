@@ -55,7 +55,7 @@ $(() => {
         url: "http://test.360guanggu.com/yuanan_fupin/api.php/Warn/warning?user_id=6",
         success: (data) => {
             var jsonData = []
-            for (var i = 0; i < 6; i++) {
+            for (var i = 0; i < 7; i++) {
                 jsonData[i] = {value: +JSON.parse(data)[i].num, name: JSON.parse(data)[i].text}
             }
             zPie.setOption({
