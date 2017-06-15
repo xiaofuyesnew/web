@@ -45,6 +45,7 @@ http://test.360guanggu.com/yuanan_fupin/api.php/Login/get_code
 get获取验证码
 post提交验证
 
+http://test.360guanggu.com/yuanan_fupin/api.php/Login/add?username=shenjiju&mail=xxue495725835@163.com
 
 
 */

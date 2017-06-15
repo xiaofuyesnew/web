@@ -97,18 +97,6 @@
                     margin-top: 5px;
                     background-color: #e2e2e2;
                 }
-                .button {
-                    float: left;
-                    display: block;
-                    width: calc(30% - 21px);
-                    height: 100%;
-                    color: #ff9a38;
-                    line-height: 40px;
-                    font-size: 1.2rem;
-                    background: url("../image/macroresult/shift.png") no-repeat 5px 50%;
-                    background-size: 15%;
-                    text-indent: 25px;
-                }
                 .triger {
                     float: right;
                     width: calc(30% - 31px);
@@ -186,12 +174,6 @@
                 .header {
                     .title {
                         font-size: 1.2rem;
-                    }
-                    .button {
-                        font-size: 1rem;
-                        background: url("../image/macroresult/shift.png") no-repeat 2px 50%;
-                        background-size: 15%;
-                        text-indent: 14px;
                     }
                     .triger {
                         background: url("../image/macroresult/more.png") no-repeat right 50%;

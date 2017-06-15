@@ -168,8 +168,16 @@ $(() => {
 /**
  * 不同年份脱贫人口数量统计图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/index     
  * 获取年份：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/year    
- * 同一年份不同地域脱贫人口对比图:http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/area?year=2017&town=河口乡
+ * 同一年份不同地域脱贫人口对比图:http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/area?year=2017&town=不限
 同一年份不同收入档次户数分布图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/hushu
 不同年份各收入档次户数对比图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/hushu_nianfen?min=0&max=3000
+
+宏观成果展示--项目进展分布图：
+http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/project?projectTypeText=雨露计划&projectChildTypeText=职业中等学历教育补助
+
+宏观成果展示--显示所有的项目类型和子类型：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/search
+
+宏观成果展示--显示所有的乡镇以及乡镇下面的村：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/searchtown
+
 
  */
