@@ -25,6 +25,9 @@ $(() => {
                     $('.u-check img').attr('src', api)
                 })
             })
+        },
+        test: () => {
+            $('.test').html(`height: ${window.innerHeight}; width: ${window.innerWidth};`)
         }
     }
 
@@ -32,6 +35,7 @@ $(() => {
     app.setScreen()
     app.loadBtn()
     app.ajax()
+    app.test()
 })
 
 /*
