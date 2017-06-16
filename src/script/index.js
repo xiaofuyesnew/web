@@ -26,8 +26,14 @@ $(() => {
                 })
             })
         },
-        test: () => {
-            $('.test').html(`height: ${window.innerHeight}; width: ${window.innerWidth};`)
+        login: () => {
+            var api = 'http://test.360guanggu.com/yuanan_fupin/api.php/Login/login'
+            
+            $.ajax({
+                type: "post",
+                url: api,
+
+            })
         }
     }
 
@@ -35,7 +41,6 @@ $(() => {
     app.setScreen()
     app.loadBtn()
     app.ajax()
-    app.test()
 })
 
 /*
