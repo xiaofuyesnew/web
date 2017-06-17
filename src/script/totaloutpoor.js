@@ -98,7 +98,7 @@ $(() => {
         
         //设定默认值
         if (!prama) {
-            prama = 'year=2017&town=不限'
+            prama = `year=2017&town=不限`
         }
 
         //获取数据
@@ -174,25 +174,227 @@ $(() => {
             type: 'post',
             data: prama,
             success: (data) => {
-                var text = [],
-                    nonum = [],
+                var rand = []
+                for (var i = 0; i < JSON.parse(data).data.length; i++) {
+                    rand[i] = JSON.parse(data).data[i].res
+                }
+                sydincome.setOption({
+                    grid: {
+                        left: '5%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            name: '元',
+                            type : 'category',
+                            axisTick: {
+                                interval: 0
+                            },
+                            axisLabel: {
+                                interval: 0,
+                                rotate: -30
+                            },
+                            data : ['0~1000', '1000~1500', '1500~2000', '2000~2500', 
+            '2500~3000', '3000~4000', '4000以上']
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            name: '户数',
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name:'户数',
+                            type:'bar',
+                            data: rand,
+                            itemStyle: {
+                                normal: {
+                                    color: '#4fb5ff'
+                                }
+                
+                            }
+                        }
+                    ]
+                })
+            }
+        })
+    }
+
+    //不同年份各收入档次户数对比图
+    var dydincome = echarts.init(document.getElementById('dydincome'))
+
+    var getDydincome = (prama) => {
+        
+        //设定默认值
+        if (!prama) {
+            prama = 'min=0&max=1000'
+        }
+
+        //获取数据
+        $.ajax({
+            url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/hushu_nianfen',
+            type: 'post',
+            data: prama,
+            success: (data) => {
+                var year = [],
                     num = []
                 for (var i = 0; i < JSON.parse(data).data.length; i++) {
-                    text[i] = JSON.parse(data).data[i].text
-                    nonum[i] = JSON.parse(data).data[i].nonum,
+                    year[i] = JSON.parse(data).data[i].filingyear
                     num[i] = JSON.parse(data).data[i].num
                 }
-                text.reverse()
-                nonum.reverse()
-                num.reverse()
-                diffArea.setOption({
-                    
+                dydincome.setOption({
+                    grid: {
+                        left: '5%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            name: '人数',
+                            type: 'value',
+                            boundaryGap: [0, 0.01],
+                            position: 'top'
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'category',
+                            axisTick: {
+                                interval: 0
+                            },
+                            axisLabel: {
+                                interval: 0
+                            },
+                            data: year
+                        }
+                    ],
+                    series: [
+                        {
+                            type:'bar',
+                            data: num,
+                            itemStyle: {
+                                normal: {
+                                    color: '#4fb5ff'
+                                }
+                
+                            }
+                        }
+                    ]
                 })
             }
         })
     }
     
+    //同一年份不同收入档次收入来源分布图
+    var sydincomes = echarts.init(document.getElementById('sydincomes'))
+
+    var getSydincomes = (prama) => {
+        
+        //设定默认值
+        if (!prama) {
+            prama = 'year=2017'
+        }
+
+        //获取数据
+        $.ajax({
+            url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/resource',
+            type: 'post',
+            data: prama,
+            success: (data) => {
+                var formatData = [],
+                    tmpObj = {}
+                for (var value in JSON.parse(data).data) {
+                    switch (value) {
+                        case 'wageIncome':
+                            tmpObj.value = +JSON.parse(data).data[value]
+                            tmpObj.name = '工资性收入'
+                            formatData.push(tmpObj)
+                            tmpObj ={}
+                            break
+                        case 'propertyIncome':
+                            tmpObj.value = +JSON.parse(data).data[value]
+                            tmpObj.name = '财产性收入'
+                            formatData.push(tmpObj)
+                            tmpObj ={}
+                            break
+                        case 'birthFunding':
+                            tmpObj.value = +JSON.parse(data).data[value]
+                            tmpObj.name = '计划生育金'
+                            formatData.push(tmpObj)
+                            tmpObj ={}
+                            break
+                        case 'fiveGuarnSubsidy':
+                            tmpObj.value = +JSON.parse(data).data[value]
+                            tmpObj.name = '五保金'
+                            formatData.push(tmpObj)
+                            tmpObj ={}
+                            break
+                        case 'ecoCompensation':
+                            tmpObj.value = +JSON.parse(data).data[value]
+                            tmpObj.name = '生态补偿金'
+                            formatData.push(tmpObj)
+                            tmpObj ={}
+                            break
+                        case 'productiveIncome':
+                            tmpObj.value = +JSON.parse(data).data[value]
+                            tmpObj.name = '生产经营性收入'
+                            formatData.push(tmpObj)
+                            tmpObj ={}
+                            break
+                        case 'transferredIncome':
+                            tmpObj.value = +JSON.parse(data).data[value]
+                            tmpObj.name = '转移性收入'
+                            formatData.push(tmpObj)
+                            tmpObj ={}
+                            break
+                        case 'mininumSubsidy':
+                            tmpObj.value = +JSON.parse(data).data[value]
+                            tmpObj.name = '低保金'
+                            formatData.push(tmpObj)
+                            tmpObj ={}
+                            break
+                        case 'pension':
+                            tmpObj.value = +JSON.parse(data).data[value]
+                            tmpObj.name = '养老保险金'
+                            formatData.push(tmpObj)
+                            tmpObj ={}
+                            break
+                        case 'otherTransIncome':
+                            tmpObj.value = +JSON.parse(data).data[value]
+                            tmpObj.name = '其他转移性收入'
+                            formatData.push(tmpObj)
+                            tmpObj ={}
+                            break
+                    }
+                }
+                sydincomes.setOption({
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{c}元 {d}%"
+                    },
+                    series : [{
+                        type: 'pie',
+                        radius : '40%',
+                        center: ['50%', '50%'],
+                        data: formatData,
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }]
+                })
+            }
+        })
+    }
+
     getDiffArea()
+    getSydincome()
+    getDydincome()
+    getSydincomes()
 
     $.ajax({
         url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/year',
@@ -221,7 +423,19 @@ $(() => {
                     {data: year}
                 ],
                 callback: (indexArr, data) => {
-                    
+                    var prama = `year=${data[0]}`
+                    getSydincome(prama)
+                }
+            })
+            var yearTwoSelect = new MobileSelect({
+                trigger: '#yearThree',
+                title: '选择年份',
+                wheels: [
+                    {data: year}
+                ],
+                callback: (indexArr, data) => {
+                    var prama = `year=${data[0]}`
+                    getSydincomes(prama)
                 }
             })
         }
@@ -239,6 +453,41 @@ $(() => {
         }
     })
 
+    var randSelect = new MobileSelect({
+        trigger: '#rand',
+        title: '选择收入范围',
+        wheels: [
+            {data: [{id:'1', value:'0~1000元'}, {id:'2', value:'1000~1500元'}, {id:'3', value:'1500~2000元'}, {id:'4', value:'2000~2500元'}, {id:'5', value:'2500~3000元'}, {id:'6', value:'3000~4000元'}, {id:'7', value:'4000元以上'}]}
+        ],
+        callback: (indexArr, data) => {
+            var prama = ''
+            switch (data[0].id) {
+                case '1':
+                    prama = 'min=0&max=1000'
+                    break
+                case '2':
+                    prama = 'min=1000&max=1500'
+                    break
+                case '3':
+                    prama = 'min=1500&max=2000'
+                    break
+                case '4':
+                    prama = 'min=2000&max=2500'
+                    break
+                case '5':
+                    prama = 'min=2500&max=3000'
+                    break
+                case '6':
+                    prama = 'min=3000&max=4000'
+                    break
+                case '7':
+                    prama = 'min=4000&max='
+                    break 
+            }
+            getDydincome(prama)
+        }
+    })
+
     $.ajax({
         url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/searchtown',
         type: 'get',
@@ -248,7 +497,5 @@ $(() => {
             }
         }
     })
-
-
 })
 
