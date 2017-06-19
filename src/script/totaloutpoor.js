@@ -487,15 +487,5 @@ $(() => {
             getDydincome(prama)
         }
     })
-
-    $.ajax({
-        url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/searchtown',
-        type: 'get',
-        success: (data) => {
-            for (var i = 0; i < JSON.parse(data).data.length; i++) {
-                console.log(JSON.parse(data).data[i].text)
-            }
-        }
-    })
 })
 

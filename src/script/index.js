@@ -27,20 +27,36 @@ $(() => {
             })
         },
         login: () => {
-            var api = 'http://test.360guanggu.com/yuanan_fupin/api.php/Login/login'
-            
-            $.ajax({
-                type: "post",
-                url: api,
+            $('button').click(function () {
+                var username = `username=${$('#username').val()}`,
+                    password = `password=${$('#password').val()}`,
+                    code = `code=${$('#code').val()}`,
+                    prama = `${username}&${password}&${code}`
+                    console.log(prama)
+                $.ajax({
+                    url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Login/login',
+                    type: "post",
+                    data: prama,
+                    success: (data) => {
+                        if (JSON.parse(data).status === 1) {
 
+                        } else {
+                            
+                        }
+                        console.log(JSON.parse(data))
+                    }
+                })
             })
         }
     }
 
     //调用方法
     app.setScreen()
-    app.loadBtn()
     app.ajax()
+    app.login()
+
+
+    //window.location = 'html/macroresult.html'
 })
 
 /*

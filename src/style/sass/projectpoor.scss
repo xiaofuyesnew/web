@@ -139,6 +139,9 @@
                     width: 70%;
                     padding-left: 20px;
                 }
+                .nm-s {
+                    width: 30%;
+                }
                 .bar-s {
                     width: 1px;
                     height: 20px;
@@ -153,6 +156,10 @@
                     background-size: 10%;
                     text-indent: 20px;
                     margin-right: 10px;
+                }
+                .tr-s {
+                    width: calc(70% - 31px);
+                    background-size: 8px;
                 }
             }
         }
@@ -194,6 +201,9 @@
                     width: 70%;
                     padding-left: 20px;
                 }
+                .nm-s {
+                    width: 30%;
+                }
                 .bar-s {
                     width: 1px;
                     height: 20px;
@@ -209,9 +219,17 @@
                     text-indent: 20px;
                     margin-right: 10px;
                 }
+                .tr-s {
+                    width: calc(70% - 31px);
+                    background-size: 8px;
+                }
             }
         }
     }
 }
 
+}
+
+#sydproject, #sydprojectb {
+    height: 400px;
 }

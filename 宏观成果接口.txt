@@ -1,0 +1,63 @@
+宏观成果展示--总体脱贫改善--不同年份脱贫人口数量统计图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/index     
+获取年份：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/year   
+同一年份不同地域脱贫人口对比图:http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/area?year=2017&town=河口乡
+
+同一年份不同收入档次户数分布图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/hushu?year=2017
+（分别对应：0~1000  1000~1500 1500~2000 2000~2500  2500~3000 3000~4000 4000以上）
+
+不同年份各收入档次户数对比图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/hushu_nianfen?min=0&max=3000
+(如果是4000以上，则min=4000 max为空)
+
+同一年份不同收入档次收入来源分布图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/resource?year=2017
+（对应的中文注释）
+`wageIncome` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '工资性收入(元)',
+  `propertyIncome` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '财产性收入(元)',
+  `birthFunding` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '计划生育金(元)',
+  `fiveGuarnSubsidy` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '五保金(元)',
+  `ecoCompensation` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '生态补偿金(元)',
+   `productiveIncome` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '生产经营性收入(元)',
+  `transferredIncome` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '转移性收入(元)',
+  `mininumSubsidy` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '低保金(元)',
+  `pension` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '养老保险金(元)',
+  `otherTransIncome` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '其他转移性收入(元)',
+
+
+宏观成果展示--显示所有的项目类型和子类型：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/search
+
+宏观成果展示--显示所有的乡镇以及乡镇下面的村：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/searchtown
+
+宏观成果展示--项目进展分布图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/project?projectTypeText=雨露计划&projectChildTypeText=职业中等学历教育补助
+(年份筛选删掉，不要那一项  value那一项没用  占比total)
+
+宏观成果展示--不同年份项目数量分布图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/differentyear?projectTypeText=易地扶贫搬迁&projectChildTypeText=分散搬迁&town=茅坪场镇&country=分水村
+
+同年份不同项目类型分布图:http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/differentproject?projectTypeText=不限&year=2016&town=茅坪场镇&country=
+（当项目类型为“不限”或者为 空时 y轴显示所有项目类型；当项目类型不为空 例如 类型为A 则y轴显示A类型下面的所有子类型）
+
+同年份不同项目类型受益/脱贫人数分布图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/souyi?projectTypeText=易地扶贫搬迁&year=2016&town=&country=
+（当项目类型为“不限”或者为 空时 y轴显示所有项目类型；当项目类型不为空 例如 类型为A 则y轴显示A类型下面的所有子类型）
+
+
+县级统筹暂时不提供
+
+
+
+资金扶贫成果--当前年资金来源总体分布图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/zijin_total?year=2016
+
+当前年资金去向总体分布图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/quxiang?year=2016
+
+中央财政..--同年度资金来源分布图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/final?year=2016&projectTypeText=易地扶贫搬迁&projectChildTypeText=分散搬迁
+
+宏观成果展示--资金扶贫成果--中央财政..--资金来源
+http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/laiyuan
+
+中央财政..--各年度不同资金来源支持项目数量图：http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/laiyuan_num?ziduan=zhongyangMoney&town=&country=&projectTypeText=&projectChildTypeText=
+（取资金来源时，把键值传过来 例如：
+zhongyangMoney:"中央专项资金"    把 zhongyangMoney 传过来）
+
+.--不同资金来源项目资金对比图：
+http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/laiyuan_num1?ziduan=zhongyangMoney&town=&country=&projectTypeText=&projectChildTypeText=
+
+
+
+
