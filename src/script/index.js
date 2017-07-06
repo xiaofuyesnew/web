@@ -19,11 +19,8 @@ $(() => {
             })
         },
         ajax: () => {
-            var api = 'http://test.360guanggu.com/yuanan_fupin/api.php/Login/get_code'
             $('.u-check img').click(function () {
-                $.get(api, (data, status) => {
-                    $('.u-check img').attr('src', api)
-                })
+                    $('.u-check img').attr('src', 'http://test.360guanggu.com/yuanan_fupin/api.php/Login/get_codes?PHPSESSID=d93793f0dc2942f1e97e4370fa9a3fdb')
             })
         },
         login: () => {
@@ -31,7 +28,8 @@ $(() => {
                 var username = `username=${$('#username').val()}`,
                     password = `password=${$('#password').val()}`,
                     code = `code=${$('#code').val()}`,
-                    prama = `${username}&${password}&${code}`
+                    key = 'PHPSESSID=d93793f0dc2942f1e97e4370fa9a3fdb',
+                    prama = `${username}&${password}&${code}&${key}`
                     console.log(prama)
                 $.ajax({
                     url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Login/login',
@@ -39,13 +37,24 @@ $(() => {
                     data: prama,
                     success: (data) => {
                         if (JSON.parse(data).status === 1) {
-
+                            window.location = 'html/macroresult.html'
                         } else {
-                            
+                            app.showMsg(JSON.parse(data).info)
                         }
                         console.log(JSON.parse(data))
                     }
                 })
+            })
+        },
+        showMsg: (msg) => {
+            $('.msg').html(msg).show(() => {
+                $('.msg').css({'opacity': '1'})
+                setTimeout(() => {
+                    $('.msg').css({'opacity': '0'})
+                }, 2000)
+                setTimeout(() => {
+                    $('.msg').hide()
+                }, 3000)
             })
         }
     }
@@ -54,7 +63,6 @@ $(() => {
     app.setScreen()
     app.ajax()
     app.login()
-
 
     //window.location = 'html/macroresult.html'
 })
