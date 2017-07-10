@@ -32,5 +32,4 @@ $(() => {
     }
 
     app.setScreen()
-    app.loadBtn()
 })

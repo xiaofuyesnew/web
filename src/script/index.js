@@ -18,7 +18,7 @@ $(() => {
                 }, 5000)
             })
         },
-        ajax: () => {
+        checkCode: () => {
             $('.u-check img').click(function () {
                     $('.u-check img').attr('src', 'http://test.360guanggu.com/yuanan_fupin/api.php/Login/get_codes?PHPSESSID=d93793f0dc2942f1e97e4370fa9a3fdb')
             })
@@ -37,7 +37,10 @@ $(() => {
                     data: prama,
                     success: (data) => {
                         if (JSON.parse(data).status === 1) {
-                            window.location = 'html/macroresult.html'
+                            localStorage.setItem('uid', JSON.parse(data).uid)
+                            localStorage.setItem('username', $('#username').val())
+                            console.log(localStorage)
+                            //window.location = 'html/mian.html'
                         } else {
                             app.showMsg(JSON.parse(data).info)
                         }
@@ -61,7 +64,7 @@ $(() => {
 
     //调用方法
     app.setScreen()
-    app.ajax()
+    app.checkCode()
     app.login()
 
     //window.location = 'html/macroresult.html'
