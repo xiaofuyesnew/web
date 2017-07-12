@@ -6,19 +6,46 @@ $(() => {
         },
         loadBtn: () => {
             $($('.u-forget button')[0]).click(() => {
-                app.showMsg('发送成功')
+                var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/,
+                    username = `username=${$('#username').val()}`,
+                    mail = `mail=${$('#mail').val()}`,
+                    prama = `${username}&${mail}`
+                if ($('#username').val() === '') {
+                    app.showMsg('请输入用户名')
+                } else if (!emailReg.test($('#mail').val())) {
+                    app.showMsg('邮箱格式不正确')
+                } else {
+                    $.ajax({
+                        url: 'http://test.360guanggu.com/fupingv1/api.php/Login/add',
+                        type: "POST",
+                        data: prama,
+                        success: (data) => {
+                            app.showMsg('发送成功')
+                        }
+                    })
+                    
+                }
             })
             $($('.u-forget button')[1]).click(() => {
-                $('.sp-wraper').show(() => {
-                    $('.sp-wraper').css({'opacity': '1'})
+                var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/,
+                    username = `username=${$('#username').val()}`,
+                    mail = `mail=${$('#mail').val()}`,
+                    code = `code=${$('#code').val()}`,
+                    prama = `${username}&${mail}&${code}`
+                $.ajax({
+                    url: 'http://test.360guanggu.com/fupingv1/api.php/Login/checkEmailCode',
+                    type: "POST",
+                    data: prama,
+                    success: (data) => {
+                        console.log(JSON.parse(data))
+                        if (JSON.parse(data).status === 1) {
+                            localStorage.setItem('id', JSON.parse(data).id)
+                            window.location = 'forgetpw2.html'
+                        } else {
+                            app.showMsg(JSON.parse(data).info)
+                        }
+                    }
                 })
-                setTimeout(() => {
-                    $('.sp-wraper').css({'opacity': '0'});
-                }, 3000)
-                setTimeout(() => {
-                    $('.sp-wraper').hide()
-                    window.location = 'forgetpw2.html'
-                }, 5000)
             })
         },
         showMsg: (msg) => {
@@ -37,12 +64,3 @@ $(() => {
     app.setScreen()
     app.loadBtn()
 })
-
-/**
- * http://localhost/fupin/api.php/Login/add?username=shenjiju&mail=xxue495725835@163.com
-
-
-忘记密码发送验证码
-
-传回用户名和邮箱
- */

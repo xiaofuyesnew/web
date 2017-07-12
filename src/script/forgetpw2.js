@@ -6,17 +6,28 @@ $(() => {
         },
         loadBtn: () => {
             $('.u-forget button').click(() => {
-                $('.sp-wraper').show(() => {
-                    $('.sp-wraper').css({'opacity': '1'})
-                })
-                setTimeout(() => {
-                    $('.sp-wraper').css({'opacity': '0'});
-                    app.showMsg('修改完成')
-                }, 3000)
-                setTimeout(() => {
-                    $('.sp-wraper').hide()
-                    window.location = '../index.html'
-                }, 5000)
+                var pwReg = /^[0-9a-zA-Z]{6,}$/,
+                    newPassword = $('#newPassword').val(),
+                    conPassword = $('#conPassword').val(),
+                    uid = `uid=${localStorage.id}`,
+                    pwd = `pwd=${$('#conPassword').val()}`,
+                    prama = `${uid}&${pwd}`
+
+                if (!pwReg.test(newPassword)) {
+                    app.showMsg('密码至少6位')
+                } else if (newPassword !== conPassword) {
+                    app.showMsg('确认密码不正确')
+                } else {
+                    console.log(prama)
+                    $.ajax({
+                        url: 'http://test.360guanggu.com/fupingv1/api.php/Login/password',
+                        type: "POST",
+                        data: prama,
+                        success: (data) => {
+                            console.log(JSON.parse(data))
+                        }
+                    })
+                }
             })
         },
         showMsg: (msg) => {

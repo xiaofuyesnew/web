@@ -2,8 +2,15 @@ $(() => {
     //创建根节点对象
     var app = {
         el: $('#app'),
+        setLocalData: () => {
+            if (localStorage.username && localStorage.password) {
+                $('#username').val(localStorage.username)
+                $('#password').val(localStorage.password)
+            }
+        },
         setScreen: () => {
             app.el.css({"height": `${window.innerHeight - 20}px`})
+            //if (localStorage.username)
         },
         loadBtn: () => {
             $('.u-login button').click(() => {
@@ -20,7 +27,7 @@ $(() => {
         },
         checkCode: () => {
             $('.u-check img').click(function () {
-                    $('.u-check img').attr('src', 'http://test.360guanggu.com/yuanan_fupin/api.php/Login/get_codes?PHPSESSID=d93793f0dc2942f1e97e4370fa9a3fdb')
+                    $('.u-check img').attr('src', 'http://test.360guanggu.com/fupingv1/api.php/Login/get_codes?PHPSESSID=d93793f0dc2942f1e97e4370fa9a3fdb')
             })
         },
         login: () => {
@@ -32,15 +39,21 @@ $(() => {
                     prama = `${username}&${password}&${code}&${key}`
                     console.log(prama)
                 $.ajax({
-                    url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Login/login',
+                    url: 'http://test.360guanggu.com/fupingv1/api.php/Login/login',
                     type: "post",
                     data: prama,
                     success: (data) => {
                         if (JSON.parse(data).status === 1) {
                             localStorage.setItem('uid', JSON.parse(data).uid)
-                            localStorage.setItem('username', $('#username').val())
+                            if ($('#remember').prop('checked')) {
+                                localStorage.setItem('username', $('#username').val())
+                                localStorage.setItem('password', $('#password').val())
+                            } else {
+                                localStorage.setItem('username', '')
+                                localStorage.setItem('password', '')
+                            }
                             console.log(localStorage)
-                            //window.location = 'html/mian.html'
+                            window.location = 'html/mian.html'
                         } else {
                             app.showMsg(JSON.parse(data).info)
                         }
@@ -64,24 +77,8 @@ $(() => {
 
     //调用方法
     app.setScreen()
+    app.setLocalData()
     app.checkCode()
     app.login()
 
-    //window.location = 'html/macroresult.html'
 })
-
-/*
-http://test.360guanggu.com/yuanan_fupin/api.php/Login/login?username=shenjiju&password=123456&code=1408
-登陆接口
-post
-
-http://test.360guanggu.com/yuanan_fupin/api.php/Login/get_code
-
-验证码接口
-get获取验证码
-post提交验证
-
-http://test.360guanggu.com/yuanan_fupin/api.php/Login/add?username=shenjiju&mail=xxue495725835@163.com
-
-
-*/

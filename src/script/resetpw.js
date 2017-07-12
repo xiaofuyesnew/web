@@ -6,16 +6,36 @@ $(() => {
         },
         loadBtn: () => {
             $('.u-reset button').click(() => {
-                $('.sp-wraper').show(() => {
-                    $('.sp-wraper').css({'opacity': '1'})
-                })
-                setTimeout(() => {
-                    $('.sp-wraper').css({'opacity': '0'});
-                }, 3000)
-                setTimeout(() => {
-                    $('.sp-wraper').hide()
-                    app.showMsg()
-                }, 5000)
+                var pwReg = /^[0-9a-zA-Z]{6,}$/,
+                    username = `username=${$('#username').val()}`,
+                    oldPassword = `old_password=${$('#oldPassword').val()}`,
+                    newPassword = `new_password=${$('#newPassword').val()}`,
+                    conPassword = `con_password=${$('#conPassword').val()}`,
+                    code = `code=${$('#code').val()}`,
+                    prama = `${username}&${oldPassword}&${newPassword}&${conPassword}&${code}`
+                
+                if ($('#username').val() === '' || $('#oldPassword').val() === '' || $('#newPassword').val() === '' || $('#conPassword').val() === '' || $('#code').val() === '') {
+                    app.showMsg('请填写相应项')
+                } else if (!pwReg.test($('#newPassword').val())) {
+                    app.showMsg('密码至少6位')
+                } else if ($('#conPassword').val() !== $('#newPassword').val()) {
+                    app.showMsg('确认密码不正确')
+                } else {
+                    $.ajax({
+                        url: 'http://test.360guanggu.com/fupingv1/api.php/Login/reset',
+                        type: "POST",
+                        data: prama,
+                        success: (data) => {
+                            console.log(JSON.parse(data))
+                            app.showMsg(JSON.parse(data).info)
+                        }
+                    })
+                }
+            })
+        },
+        checkCode: () => {
+            $('.u-check img').click(function () {
+                    $('.u-check img').attr('src', 'http://test.360guanggu.com/yuanan_fupin/api.php/Login/get_codes?PHPSESSID=d93793f0dc2942f1e97e4370fa9a3fdb')
             })
         },
         showMsg: () => {
@@ -32,4 +52,6 @@ $(() => {
     }
 
     app.setScreen()
+    app.checkCode()
+    app.loadBtn()
 })
