@@ -27,7 +27,7 @@ $(() => {
         },
         checkCode: () => {
             $('.u-check img').click(function () {
-                    $('.u-check img').attr('src', 'http://test.360guanggu.com/fupingv1/api.php/Login/get_codes?PHPSESSID=d93793f0dc2942f1e97e4370fa9a3fdb')
+                    $('.u-check img').attr('src', 'http://test.360guanggu.com/fupingv1/api.php/Login/get_codes?PHPSESSID=code')
             })
         },
         login: () => {
@@ -35,7 +35,7 @@ $(() => {
                 var username = `username=${$('#username').val()}`,
                     password = `password=${$('#password').val()}`,
                     code = `code=${$('#code').val()}`,
-                    key = 'PHPSESSID=d93793f0dc2942f1e97e4370fa9a3fdb',
+                    key = 'PHPSESSID=code',
                     prama = `${username}&${password}&${code}&${key}`
                     console.log(prama)
                 $.ajax({
@@ -53,7 +53,7 @@ $(() => {
                                 localStorage.setItem('password', '')
                             }
                             console.log(localStorage)
-                            window.location = 'html/mian.html'
+                            window.location = 'html/main.html'
                         } else {
                             app.showMsg(JSON.parse(data).info)
                         }

@@ -11,7 +11,7 @@ $(() => {
                     oldPassword = `old_password=${$('#oldPassword').val()}`,
                     newPassword = `new_password=${$('#newPassword').val()}`,
                     conPassword = `con_password=${$('#conPassword').val()}`,
-                    code = `code=${$('#code').val()}`,
+                    code = `code=${$('#code').val()}&PHPSESSID=code`,
                     prama = `${username}&${oldPassword}&${newPassword}&${conPassword}&${code}`
                 
                 if ($('#username').val() === '' || $('#oldPassword').val() === '' || $('#newPassword').val() === '' || $('#conPassword').val() === '' || $('#code').val() === '') {
@@ -27,7 +27,10 @@ $(() => {
                         data: prama,
                         success: (data) => {
                             console.log(JSON.parse(data))
-                            app.showMsg(JSON.parse(data).info)
+                            if (JSON.parse(data).status === 1) {
+                                app.showMsg('重置成功')
+                                window.location = '../index.html'
+                            }
                         }
                     })
                 }
@@ -35,11 +38,11 @@ $(() => {
         },
         checkCode: () => {
             $('.u-check img').click(function () {
-                    $('.u-check img').attr('src', 'http://test.360guanggu.com/yuanan_fupin/api.php/Login/get_codes?PHPSESSID=d93793f0dc2942f1e97e4370fa9a3fdb')
+                    $('.u-check img').attr('src', 'http://test.360guanggu.com/fupingv1/api.php/Login/get_codes?PHPSESSID=code')
             })
         },
-        showMsg: () => {
-            $('.msg').html('重置成功').show(() => {
+        showMsg: (msg) => {
+            $('.msg').html(msg).show(() => {
                 $('.msg').css({'opacity': '1'})
                 setTimeout(() => {
                     $('.msg').css({'opacity': '0'})
