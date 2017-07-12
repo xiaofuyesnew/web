@@ -1,9 +1,0 @@
-@import 'common/common';
-@import 'common/mixin';
-
-
-#app {
-    padding: 10px;
-    position: relative;
-    @include login-bg;
-}

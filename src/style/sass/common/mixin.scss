@@ -11,9 +11,9 @@
 }
 
 //微观成果展示首页背景
-@mixin mir-bg {
-    background: url("../image/mir-bg.png") no-repeat;
-    background-size: 100% auto;
+@mixin main-bg {
+    background: url("../image/main-bg.png") no-repeat;
+    background-size: 100% 25%;
 }
 
 //扶贫对象查看首页背景
@@ -179,9 +179,10 @@
 
 @mixin m-cards {
     .m-cards {
-        padding: 0 10px;
+        padding: 40px 10px 0;
         position: absolute;
-        bottom: 71px;
+        height: calc(75% - 111px);
+        top: 25%;
         left: 0;
         width: calc(100% - 20px);
         .cds-left {

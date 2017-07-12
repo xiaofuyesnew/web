@@ -1,5 +1,4 @@
 $(() => {
-    //创建根节点对象
     var app = {
         el: $('#app'),
         setScreen: () => {
