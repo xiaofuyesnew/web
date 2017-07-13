@@ -66,7 +66,7 @@ $(() => {
     }
 
 
-    //下来搜索框
+    //下拉搜索框
     $('.m-dropdown .u-show').click(function () {
         if ($('.m-dropdown .u-hide').hasClass('animDown')) {
             $('.m-dropdown .u-hide').removeClass('animDown')
@@ -83,5 +83,16 @@ $(() => {
             $(this).children('img').attr('src', '../image/dropup.png')
             $(this).children('span').html('点击隐藏搜索')
         }
+    })
+
+    //重置按钮
+    $('#reset').click(function () {
+        $('#year').html('不限')
+        $('#area').html('不限')
+    })
+
+    //搜索按钮
+    $('#search').click(function () {
+        
     })
 })
