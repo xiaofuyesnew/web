@@ -1,0 +1,22 @@
+@import 'common/common';
+@import 'common/mixin';
+
+#app {
+    padding: 10px;
+    position: relative;
+    @include mar-bg;
+}
+
+.m-header {
+    @include m-header;
+    .u-back {
+        @include u-back;
+    }
+    .u-title {
+        @include u-title;
+        width: 89vw;
+        text-indent: -11vw;
+    }
+}
+
+@include m-cards;

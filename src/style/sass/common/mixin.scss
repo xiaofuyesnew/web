@@ -189,11 +189,15 @@
             @include cards;
             float: left;
             width: calc(50% - 5px);
+            margin-top: 40%;
         }
         .cds-right {
             @include cards;
             float: right;
             width: calc(50% - 5px);
+        }
+        .cds-first-right {
+            margin-top: 40%;
         }
         .cds-center {
             @include cards;
@@ -239,5 +243,17 @@
                 float: right;
             }
         }
+    }
+}
+
+@mixin u-index {
+    .u-index {
+        display: block;
+        float: right;
+        background: url(../image/index.png) no-repeat;
+        background-size: 65%;
+        background-position: left 50%; 
+        width: 14vw;
+        height: 100%;
     }
 }
