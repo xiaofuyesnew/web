@@ -1,0 +1,56 @@
+贫困户扶贫成果列表
+地址：
+	http://test.360guanggu.com/fupingv1/api.php/Micro/ajaxMicro
+参数：
+	area（行政区划）
+	filingYear（年份）
+	name（姓名）
+	idNumber（证件号码）
+	cirterianIden（识别标准）
+	povertyAttribute（贫困属性）
+	isOupoor（脱贫属性）
+	page（当前页码）
+返回值：
+	status（状态）
+	info（提示信息）
+	data（数据）
+
+贫困户扶贫成果详情
+地址：
+	http://test.360guanggu.com/fupingv1/api.php/Micro/ajaxDetail
+参数：
+	table_id（贫困户扶贫成果列表主键id）
+返回值：
+	status（状态）
+	info（提示信息）
+	data（数据）
+
+地区列表
+地址：
+	http://test.360guanggu.com/fupingv1/api.php/Micro/ajaxArea
+参数：
+	pid（地区父id）
+返回值：
+	status（状态）
+	info（提示信息）
+	data（数据）
+
+年份列表
+地址：
+	http://test.360guanggu.com/fupingv1/api.php/Micro/ajaxYear
+参数：
+	无
+返回值：
+	status（状态）
+	info（提示信息）
+	data（数据）
+
+属性列表
+地址：
+	http://test.360guanggu.com/fupingv1/api.php/Micro/ajaxAttribute
+参数：
+	type（贫困属性JDLK_POVERTY_ATTR，脱贫属性DIC_OUT_POOR，识别标准JDLK_CIRTERIAN_IDEN）
+返回值：
+	status（状态）
+	info（提示信息）
+	data（数据）
