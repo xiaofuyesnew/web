@@ -63,8 +63,43 @@
 
 @include u-index;
 
+.m-table {
+    margin: 131px 0 0 -10px;
+    width: 100vw;
+    height: 62px;
+    border-top: 1px solid #e2e2e2;
+    background-color: #fff;
+    .unit {
+        height: 30px;
+        border-bottom: 1px solid #e2e2e2;
+        padding: 0 10px;
+        .cell {
+            height: 30px;
+            line-height: 30px;
+            .name {
+                float: left;
+            }
+            .num {
+                float: right;
+                color: #999;
+            }
+        }
+        .left {
+            padding-right: 10px;
+            width: calc(50% - 11px);
+            border-right: 1px solid #e2e2e2;
+            float: left;
+        }
+        .right {
+            padding-left: 10px;
+            width: calc(50% - 10px);
+            float: right;
+        }
+    }
+}
+
 .m-main {
-    margin-top: 131px;
+    margin-top: 10px;
     .u-main {
         width: 100vw;
         margin: 10px 0 0 -10px;

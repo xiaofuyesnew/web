@@ -120,7 +120,49 @@ $(() => {
     //搜索按钮
     $('#search').click(function () {
 
-        
-        
     })
+
+    //安放当前的状态数据
+    function setStatus(year, area, condition, base) {
+        var prama = '',
+            yearData = '',
+            areaData = '',
+            conditionData = '',
+            baseData = ''
+
+        if (year && year !== '不限') {
+            yearData = `filingYear=${year}`
+        } else {
+            yearData = 'filingYear=2017'
+        }
+
+        if (area && area !== '不限') {
+            areaData = `area=${area}`
+        } else {
+            areaData = 'area=远安县'
+        }
+
+        conditionData = condition ? `condition=${condition}` : 'condition=1'
+
+        baseData = base ? `base=${base}` : 'base=1'
+
+        prama = `${yearData}&${areaData}&${conditionData}&${baseData}`
+
+        $.ajax({
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/axis',
+            type: 'POST',
+            data: prama,
+            success: (data) => {
+                var jsonData = JSON.parse(data).data
+                console.log(JSON.parse(data))
+                $('#pvc').html(jsonData.poor_village_count)
+                $('#ppc').html(jsonData.poor_people_count)
+                $('#pc').html(jsonData.poor_count)
+                $('#oc').html(jsonData.opoor_count)
+            }
+        })
+    }
+
+    //调用设置数据方法
+    setStatus()
 })
