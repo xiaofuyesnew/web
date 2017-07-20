@@ -14,7 +14,6 @@ con_password（确认密码）
 code（验证码）
 PHPSESSID（固定的值，你懂的）
 
-
 验证邮箱验证码
 http://test.360guanggu.com/fupingv1/api.php/Login/checkEmailCode
 参数

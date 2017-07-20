@@ -1,0 +1,12 @@
+宏观扶贫成果--总体脱贫改善--不同收入来源统计图
+地址：
+http://test.360guanggu.com/fupingv1/api.php/Changepoor/resource
+参数：
+year（年份）
+
+返回值：
+wageIncome（工资性收入）
+propertyIncome（财产性收入）
+productiveIncome（经营性收入）
+transferredIncome（转移性收入）
+totalIncome（收入汇总）

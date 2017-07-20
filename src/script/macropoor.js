@@ -1,4 +1,9 @@
 $(() => {
+
+    //地图标记数组
+    var mapMarker = [],
+        area = []
+
     //创建根节点对象
     var app = {
         el: $('#app'),
@@ -17,18 +22,24 @@ $(() => {
         center: [111.640233, 31.060708]
     })
 
+
+    AMap.event.addDomListener(document.getElementById('search'), 'click', function() {
+        map.remove(mapMarker);
+    }, false);
+    /*
 	new AMap.Marker({
 			position: [111.640233, 31.060708],
 			map: map,
 			content: `<div class="maker"><div class="zhen">凤鸣镇</div><div class="hu">12345户</div><div class="ren">1234567人</div></div>`
 	})
 
+
 	new AMap.Marker({
 			position: [111.400233, 31.090708],
 			map: map,
-			content: `<div class="maker"><div class="zhen">凤鸣镇</div><div class="hu">12345户</div><div class="ren">1234567人</div></div>`
+			content: `<div class="maker"><div class="zhen">测试</div><div class="hu">12345户</div><div class="ren">1234567人</div></div>`
 	})
-
+    */
     addYuanan()
 
     function addYuanan() {
@@ -91,8 +102,94 @@ $(() => {
         $('#area').html('不限')
     })
 
+    //获取标记点
+    var getYearData = (year, dist) => {
+        var prama = '',
+            index = 0
+
+        if (!year || year === '不限') {
+            prama = `filingYear=2017`
+        } else {
+            prama = `filingYear=${year}`
+        }
+
+        if (mapMarker !== []) {
+            mapMarker = []
+        }   
+
+        $.ajax({
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/map',
+            type: 'POST',
+            data: prama,
+            async: false,
+            success: (data) => {
+                for (var i = 0; i < 7; i++) {
+                    mapMarker.push(
+                        new AMap.Marker({
+                            label: i,
+	    		            position: JSON.parse(data).data[i].position,
+	    		            map: map,
+                            content: `<div class="maker"><div class="zhen">${JSON.parse(data).data[i].name}</div><div class="hu">${JSON.parse(data).data[i].hu}户</div><div class="ren">${JSON.parse(data).data[i].ren}人</div></div>`
+                        })
+                    )
+                }
+            }
+        })
+
+        if (dist && dist !== '不限') {
+            for (var i = 0; i < 7; i++) {
+                if (i !== area.indexOf(dist)) {
+                    mapMarker[i].hide()
+                }
+            }
+        }
+    }
+    
+    getYearData()
+
+    //获取地域
+    $.ajax({
+        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/areaList?pid=420525000000',
+        type: 'GET',
+        success: (data) => {
+            var jsonData = JSON.parse(data)
+            for (var i = 0; i < jsonData.data.length; i++) {
+                area[i] = jsonData.data[i].text
+            }
+            var areaSelect = new MobileSelect({
+                trigger: '#area',
+                title: '行政区划',
+                wheels: [
+                    {data: area}
+                ]
+            })
+        }
+    })
+
+    //获取年份
+    $.ajax({
+        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/yearList',
+        type: 'GET',
+        success: (data) => {
+            var jsonData = JSON.parse(data),
+                year = []
+            for (var i = 0; i < jsonData.data.length; i++) {
+                year[i] = jsonData.data[i].filingyear
+            }
+            var yearSelect = new MobileSelect({
+                trigger: '#year',
+                title: '选择年份',
+                wheels: [
+                    {data: year}
+                ]
+            })
+        }
+    })
+
     //搜索按钮
     $('#search').click(function () {
+
+        getYearData($('#year').html(), $('#area').html())
         
     })
 })

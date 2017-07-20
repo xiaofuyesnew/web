@@ -82,3 +82,10 @@ pid（0表示远安县）
 http://test.360guanggu.com/fupingv1/api.php/Macro/attrList
 参数：
 type（贫困属性JDLK_POVERTY_ATTR 脱贫属性DIC_OUT_POOR 识别标准JDLK_CIRTERIAN_IDEN）
+
+
+扶贫成果展示--宏观扶贫成果--产业扶贫统计
+地址：
+http://test.360guanggu.com/fupingv1/api.php/macro/industry
+参数：
+无
