@@ -10,7 +10,6 @@ $(() => {
         },
         setScreen: () => {
             app.el.css({"height": `${window.innerHeight - 20}px`})
-            //if (localStorage.username)
         },
         loadBtn: () => {
             $('.u-login button').click(() => {

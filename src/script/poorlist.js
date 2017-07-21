@@ -44,12 +44,27 @@ $(() => {
         type: 'GET',
         success: (data) => {
             var jsonData = JSON.parse(data),
-                area = []
+                area = [{id:'0',value:'不限'}],
+                cun = [{id:'0',value:'不限'}]
             for (var i = 0; i < jsonData.data.length; i++) {
-                area[i] = jsonData.data[i].text
+                $.ajax({
+                    url: `http://test.360guanggu.com/fupingv1/api.php/Macro/areaList?pid=${jsonData.data[i].id}`,
+                    type: 'GET',
+                    async: false,
+                    success: (data) => {
+                        for (var i = 0; i < JSON.parse(data).data.length; i++) {
+                            cun.push({id: JSON.parse(data).data[i].id, value: JSON.parse(data).data[i].text})
+                        }
+                    }
+                })
+
+                area.push({id: jsonData.data[i].id, value: jsonData.data[i].text, childs: cun})
+
+                cun = [{id:'0',value:'不限'}]
             }
+
             var areaSelect = new MobileSelect({
-                trigger: '#test',
+                trigger: '#area',
                 title: '行政区划',
                 wheels: [
                     {data: area}
