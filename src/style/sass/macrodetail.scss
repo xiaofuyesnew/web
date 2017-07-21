@@ -309,30 +309,55 @@
 }
 
 @media screen and (max-width: 358px) {
-    .select {
-        font-size: 1.2rem;
-        color: #7f7f7f;
-        line-height: 30px;
-        .name {
-            float: left;
-            width: 70%;
-            padding-left: 20px;
-        }
-        .bar-s {
-            width: 1px;
-            height: 20px;
-            margin-top: 5px;
-            float: left;
-            background-color: #e2e2e2;
-        }
-        .triger {
-            float: right;
-            width: calc(30% - 31px);
-            background: url("../image/right.png") no-repeat right 50%;
-            background-size: 10%;
-            text-indent: 20px;
-            margin-right: 10px;
+    .m-main {
+        .u-main {
+            .unit {
+                .header {
+                    .title {
+                        font-size: 1.2rem;
+                    }
+                    .button {
+                        font-size: 1rem;
+                        background: url("../image/shift.png") no-repeat 2px 50%;
+                        background-size: 15%;
+                        text-indent: 14px;
+                    }
+                    .triger {
+                        background: url("../image/right.png") no-repeat right 50%;
+                        background-size: 6px;
+                        text-indent: 12px;
+                        font-size: 1.2rem;
+                    }
+                    .tr-w {
+                        text-indent: 4px;
+                    }
+                }
+                .select {
+                font-size: 1.2rem;
+                color: #7f7f7f;
+                line-height: 30px;
+                .name {
+                    float: left;
+                    width: 70%;
+                    padding-left: 20px;
+                }
+                .bar-s {
+                    width: 1px;
+                    height: 20px;
+                    margin-top: 5px;
+                    float: left;
+                    background-color: #e2e2e2;
+                }
+                .triger {
+                    float: right;
+                    width: calc(30% - 31px);
+                    background: url("../image/macroresult/more.png") no-repeat right 50%;
+                    background-size: 10%;
+                    text-indent: 20px;
+                    margin-right: 10px;
+                }
+            }
         }
     }
 }
-
+}

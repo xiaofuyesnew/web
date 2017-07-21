@@ -18,10 +18,18 @@ $(() => {
     $('.u-main .button').click(function () {
         $('.u-main').children('.unit').removeClass('hide')
         $(this).parents('.unit').addClass('hide')
+        
+        if ($(this).html() === '切换到户数') {
+            setPooroutHu($('#year').html(), $('#area').html())
+        } else {
+            setPooroutRen($('#year').html(), $('#area').html())
+        }
     })
 
     $('.subnav .unit').click(function () {
-        var status = $(this).attr('data-nav')
+        var status = $(this).attr('data-nav'),
+            year = $('#year').html(),
+            area = $('#area').html()
         $('.subnav .unit').removeClass('blue')
         $('.subnav .unit .bar').addClass('hide')
         $(this).addClass('blue')
@@ -30,6 +38,9 @@ $(() => {
             $('.m-main').children().addClass('hide')
             $($('.m-main .u-main')[0]).removeClass('hide')
             $('#pageStatus').val(status)
+
+            setPooroutRen(year, area)
+            setPooroutHu(year, area)
         } else if (status === '2') {
             if ($(this).prev().hasClass('hide')) {
                 $(this).prev().removeClass('hide')
@@ -38,6 +49,8 @@ $(() => {
             $('.m-main').children().addClass('hide')
             $($('.m-main .u-main')[1]).removeClass('hide')
             $('#pageStatus').val(status)
+
+            setPoorattrHu(year, area)
         } else if (status === '3') {
             if (!$(this).prev().prev().hasClass('hide')) {
                 $(this).prev().prev().addClass('hide')
@@ -46,10 +59,14 @@ $(() => {
             $('.m-main').children().addClass('hide')
             $($('.m-main .u-main')[2]).removeClass('hide')
             $('#pageStatus').val(status)
+
+            setPoorcsHu(year, area)
         } else if (status === '4') {
             $('.m-main').children().addClass('hide')
             $($('.m-main .u-main')[3]).removeClass('hide')
             $('#pageStatus').val(status)
+
+            setOutpoorRen(year, area)
         }
     })
 
@@ -119,8 +136,434 @@ $(() => {
 
     //搜索按钮
     $('#search').click(function () {
+        var year = $('#year').html(),
+            area = $('#area').html()
+        
+        setStatus(year, area)
 
+        switch ($('.blue').attr('data-nav')) {
+            case '1':
+                setPooroutRen(year, area)
+                setPooroutHu(year, area)
+                break
+            case '2':
+                setPoorattrHu(year, area)
+                break
+            case '3':
+                setPoorcsHu(year, area)
+                break
+            case '4':
+                setOutpoorRen(year, area)
+                break
+        }
     })
+
+    //地域-人数
+    var pooroutRen = echarts.init(document.getElementById('poorout-ren'))
+    //地域-户数
+    var pooroutHu = echarts.init(document.getElementById('poorout-hu'))
+    //属性-户数
+    var poorattrHu = echarts.init(document.getElementById('poorattr-hu'))
+    //原因-户数
+    var poorcsHu = echarts.init(document.getElementById('poorcs-hu'))
+    //脱贫-人数
+    var outpoorRen = echarts.init(document.getElementById('outpoor-ren'))
+
+    //地域-人数
+    function setPooroutRen(year, area) {
+        var prama = '',
+            yearData = '',
+            areaData = '',
+            conditionData = 'condition=1',
+            baseData = 'base=1'
+
+        if (year && year !== '不限') {
+            yearData = `filingYear=${year}`
+        } else {
+            yearData = 'filingYear=2017'
+        }
+
+        if (area && area !== '不限') {
+            areaData = `area=${area}`
+        } else {
+            areaData = 'area=远安县'
+        }
+
+        prama = `${yearData}&${areaData}&${conditionData}&${baseData}`
+
+        $.ajax({
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/axis',
+            type: 'POST',
+            data: prama,
+            success: (data) => {
+                var jsonData = JSON.parse(data).data.axis,
+                    nameData = [],
+                    pcData = [],
+                    ncData = []
+
+                for (var i = 0; i < jsonData.length; i++) {
+                    nameData.push(jsonData[i].name)
+                    pcData.push(+jsonData[i].poor_count)
+                    ncData.push(+jsonData[i].npoor_count)
+                }
+                
+                nameData.reverse()
+                pcData.reverse()
+                ncData.reverse()
+                
+                pooroutRen.setOption({
+                    legend: {
+                        data: ['贫困人口数', '脱贫人口数']
+                    },
+                    grid: {
+                        left: 'left',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        boundaryGap: [0, 0.01],
+                        position: 'top'
+                    },
+                    yAxis: {
+                        type: 'category',
+                        axisTick: {
+                            interval: 0
+                        },
+                        axisLabel: {
+                            interval: 0
+                        },
+                        data: nameData
+                    },
+                    series: [
+                        {
+                            name: '贫困人口数',
+                            type: 'bar',
+                            data: pcData
+                        },
+                        {
+                            name: '脱贫人口数',
+                            type: 'bar',
+                            data: ncData
+                        }
+                    ]
+                })
+            }
+        })
+    }
+
+    setPooroutRen()
+
+    //地域-户数
+    function setPooroutHu(year, area) {
+        var prama = '',
+            yearData = '',
+            areaData = '',
+            conditionData = 'condition=1',
+            baseData = 'base=2'
+
+        if (year && year !== '不限') {
+            yearData = `filingYear=${year}`
+        } else {
+            yearData = 'filingYear=2017'
+        }
+
+        if (area && area !== '不限') {
+            areaData = `area=${area}`
+        } else {
+            areaData = 'area=远安县'
+        }
+
+        prama = `${yearData}&${areaData}&${conditionData}&${baseData}`
+
+        $.ajax({
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/axis',
+            type: 'POST',
+            data: prama,
+            success: (data) => {
+                var jsonData = JSON.parse(data).data.axis,
+                    nameData = [],
+                    pcData = [],
+                    ncData = []
+
+                for (var i = 0; i < jsonData.length; i++) {
+                    nameData.push(jsonData[i].name)
+                    pcData.push(+jsonData[i].poor_count)
+                    ncData.push(+jsonData[i].npoor_count)
+                }
+                
+                nameData.reverse()
+                pcData.reverse()
+                ncData.reverse()
+                
+                pooroutHu.setOption({
+                    legend: {
+                        data: ['贫困户数', '脱贫户数']
+                    },
+                    grid: {
+                        left: 'left',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        boundaryGap: [0, 0.01],
+                        position: 'top'
+                    },
+                    yAxis: {
+                        type: 'category',
+                        axisTick: {
+                            interval: 0
+                        },
+                        axisLabel: {
+                            interval: 0
+                        },
+                        data: nameData
+                    },
+                    series: [
+                        {
+                            name: '贫困户数',
+                            type: 'bar',
+                            data: pcData
+                        },
+                        {
+                            name: '脱贫户数',
+                            type: 'bar',
+                            data: ncData
+                        }
+                    ]
+                })
+            }
+        })
+    }
+
+    setPooroutHu()
+
+    //属性-户数
+    function setPoorattrHu(year, area) {
+        var prama = '',
+            yearData = '',
+            areaData = '',
+            conditionData = 'condition=2',
+            baseData = 'base=2'
+
+        if (year && year !== '不限') {
+            yearData = `filingYear=${year}`
+        } else {
+            yearData = 'filingYear=2017'
+        }
+
+        if (area && area !== '不限') {
+            areaData = `area=${area}`
+        } else {
+            areaData = 'area=远安县'
+        }
+
+        prama = `${yearData}&${areaData}&${conditionData}&${baseData}`
+
+        $.ajax({
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/axis',
+            type: 'POST',
+            data: prama,
+            success: (data) => {
+                var jsonData = JSON.parse(data).data.axis,
+                    nameData = [],
+                    numData = []
+
+                for (var i = 0; i < jsonData.length; i++) {
+                    nameData.push(jsonData[i].name)
+                    numData.push(+jsonData[i].num)
+                }
+                
+                nameData.reverse()
+                numData.reverse()
+                
+                poorattrHu.setOption({
+                    legend: {
+                        data: ['户数']
+                    },
+                    grid: {
+                        left: 'left',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        boundaryGap: [0, 0.01],
+                        position: 'top'
+                    },
+                    yAxis: {
+                        type: 'category',
+                        axisTick: {
+                            interval: 0
+                        },
+                        axisLabel: {
+                            interval: 0
+                        },
+                        data: nameData
+                    },
+                    series: [
+                        {
+                            name: '户数',
+                            type: 'bar',
+                            data: numData
+                        }
+                    ]
+                })
+            }
+        })
+    }
+
+    setPoorattrHu()
+
+    //原因-户数
+    function setPoorcsHu(year, area) {
+        var prama = '',
+            yearData = '',
+            areaData = '',
+            conditionData = 'condition=3',
+            baseData = 'base=2'
+
+        if (year && year !== '不限') {
+            yearData = `filingYear=${year}`
+        } else {
+            yearData = 'filingYear=2017'
+        }
+
+        if (area && area !== '不限') {
+            areaData = `area=${area}`
+        } else {
+            areaData = 'area=远安县'
+        }
+
+        prama = `${yearData}&${areaData}&${conditionData}&${baseData}`
+
+        $.ajax({
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/axis',
+            type: 'POST',
+            data: prama,
+            success: (data) => {
+                var jsonData = JSON.parse(data).data.axis,
+                    nameData = [],
+                    numData = []
+
+                for (var key in jsonData) {
+                    nameData[+key - 1] = jsonData[key].name
+                    numData[+key - 1] = jsonData[key].num
+                }
+        
+                nameData.reverse()
+                numData.reverse()
+                
+                poorcsHu.setOption({
+                    legend: {
+                        data: ['户数']
+                    },
+                    grid: {
+                        left: 'left',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        boundaryGap: [0, 0.01],
+                        position: 'top'
+                    },
+                    yAxis: {
+                        type: 'category',
+                        axisTick: {
+                            interval: 0
+                        },
+                        axisLabel: {
+                            interval: 0
+                        },
+                        data: nameData
+                    },
+                    series: [
+                        {
+                            name: '户数',
+                            type: 'bar',
+                            data: numData
+                        }
+                    ]
+                })
+            }
+        })
+    }
+
+    setPoorcsHu()
+
+    //脱贫-人数
+    function setOutpoorRen(year, area) {
+        var prama = '',
+            yearData = '',
+            areaData = '',
+            conditionData = 'condition=4',
+            baseData = 'base=1'
+
+        if (year && year !== '不限') {
+            yearData = `filingYear=${year}`
+        } else {
+            yearData = 'filingYear=2017'
+        }
+
+        if (area && area !== '不限') {
+            areaData = `area=${area}`
+        } else {
+            areaData = 'area=远安县'
+        }
+
+        prama = `${yearData}&${areaData}&${conditionData}&${baseData}`
+
+        $.ajax({
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/axis',
+            type: 'POST',
+            data: prama,
+            success: (data) => {
+                var jsonData = JSON.parse(data).data.axis,
+                    nameData = [],
+                    numData = []
+
+                for (var i = 0; i < jsonData.length; i++) {
+                    nameData.push(jsonData[i].name)
+                    numData.push(+jsonData[i].npoor_count)
+                }
+                
+                nameData.reverse()
+                numData.reverse()
+                
+                outpoorRen.setOption({
+                    legend: {
+                        data: ['人口数']
+                    },
+                    grid: {
+                        left: 'left',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        boundaryGap: [0, 0.01],
+                        position: 'top'
+                    },
+                    yAxis: {
+                        type: 'category',
+                        axisTick: {
+                            interval: 0
+                        },
+                        axisLabel: {
+                            interval: 0
+                        },
+                        data: nameData
+                    },
+                    series: [
+                        {
+                            name: '人口数',
+                            type: 'bar',
+                            data: numData
+                        }
+                    ]
+                })
+            }
+        })
+    }
+
+    setOutpoorRen()
 
     //安放当前的状态数据
     function setStatus(year, area, condition, base) {
@@ -154,7 +597,6 @@ $(() => {
             data: prama,
             success: (data) => {
                 var jsonData = JSON.parse(data).data
-                console.log(JSON.parse(data))
                 $('#pvc').html(jsonData.poor_village_count)
                 $('#ppc').html(jsonData.poor_people_count)
                 $('#pc').html(jsonData.poor_count)
