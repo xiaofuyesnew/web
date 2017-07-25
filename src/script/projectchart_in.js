@@ -31,6 +31,20 @@ $(() => {
                     getSydt(prama)
                 }
             })
+
+            var yearTwoSelect = new MobileSelect({
+                trigger: '#yearTwo',
+                title: '选择年份',
+                wheels: [
+                    {data: jsonData}
+                ],
+                callback: (indexArr, data) => {
+
+                    var prama = `unit=${$('#companyTwo').html()}&year=${data[0]}`
+
+                    getSymoney(prama)
+                }
+            })
         }
     })
 
@@ -69,6 +83,28 @@ $(() => {
                 }
             })
 
+            var typeTwoSelect = new MobileSelect({
+                trigger: '#typeTwo',
+                title: '项目类型',
+                wheels: [
+                    {data: type}
+                ],
+                callback: (indexArr, data) => {
+                    var prama = ''
+
+                    if (data[0] !== '不限') {
+                        prama = `unit=${$('#companyThree').html()}&poverty=${data[0]}`
+                    } else {
+                        prama = `unit=${$('#companyThree').html()}`
+                    }
+
+                    if ($('#subtypeTwo').html() !== '不限') {
+                        prama += `&item_subtype=${$('#subtypeTwo').html()}`
+                    }
+
+                    getDymoney(prama)
+                }
+            })
         }
     })
 
@@ -110,6 +146,30 @@ $(() => {
                     getDiffYear(prama)
                 }
             })
+
+            var subTypeTwoSelect = new MobileSelect({
+                trigger: '#subtypeTwo',
+                title: '子项目类型',
+                wheels: [
+                    {data: subType}
+                ],
+                callback: (indexArr, data) => {
+
+                    var prama = ''
+
+                    if (data[0] !== '不限') {
+                        prama = `unit=${$('#companyThree').html()}&item_subtype=${data[0]}`
+                    } else {
+                        prama = `unit=${$('#companyThree').html()}`
+                    }
+
+                    if ($('#typeTwo').html() !== '不限') {
+                        prama += `&poverty=${$('#typeTwo').html()}`
+                    }
+
+                    getDymoney(prama)
+                }
+            })
         }
     })
 
@@ -127,6 +187,8 @@ $(() => {
 
             $('#company').html(company[0])
             $('#companyTwo').html(company[0])
+            $('#companyThree').html(company[0])
+            $('#companyFour').html(company[0])
 
             var companySelect = new MobileSelect({
                 trigger: '#company',
@@ -171,10 +233,32 @@ $(() => {
                     {data: company}
                 ],
                 callback: (indexArr, data) => {
-                    /*
-                    var prama = `unit=${data[0]}&year=${$('#year').html()}`
 
-                    getSydt(prama)*/
+                    var prama = `unit=${data[0]}`
+
+                    if ($('#subtypeTwo').html() !== '不限') {
+                        prama += `&item_subtype=${$('#subtypeTwo').html()}`
+                    }
+
+                    if ($('#typeTwo').html() !== '不限') {
+                        prama += `&poverty=${$('#typeTwo').html()}`
+                    }
+
+                    getDymoney(prama)
+                }
+            })
+
+            var companyFourSelect = new MobileSelect({
+                trigger: '#companyFour',
+                title: '责任单位',
+                wheels: [
+                    {data: company}
+                ],
+                callback: (indexArr, data) => {
+
+                    var prama = `unit=${data[0]}&year=${$('#yearTwo').html()}`
+
+                    getSymoney(prama)
                 }
             })
         }
@@ -220,7 +304,7 @@ $(() => {
                         name: '项目数',
                         nameRotate: -90,
                         type: 'value',
-                        boundaryGap: [0, 0.01],
+                        boundaryGap: [0, 1],
                         position: 'top'
                     },
                     yAxis: {
@@ -258,13 +342,11 @@ $(() => {
             pramaData = prama
         }
         
-        console.log(pramaData)
         $.ajax({
             url: 'http://test.360guanggu.com/fupingv1/api.php/Apple/differentTypeMoneyCount',
             type: 'POST',
             data: pramaData,
             success: (data) => {
-                console.log(JSON.parse(data)[0].poverty)
                 var type = ['产业发展', '创业增收', '医疗卫生', '危房改造', '发展教育', '基础设施', '民政社保等兜底', '生态补偿1'],
                     count = []
                 for (var i = 0; i < JSON.parse(data).length; i++) {
@@ -286,7 +368,7 @@ $(() => {
                         name: '项目数',
                         nameRotate: -90,
                         type: 'value',
-                        boundaryGap: [0, 0.01],
+                        boundaryGap: [0, 1],
                         position: 'top'
                     },
                     yAxis: {
@@ -311,7 +393,6 @@ $(() => {
         })
     }
     
-
     //不同年份统筹资金金额分布图
     var dymoney = echarts.init(document.getElementById('dymoney'))
 
@@ -325,31 +406,32 @@ $(() => {
         }
 
         $.ajax({
-            url: 'http://test.360guanggu.com/fupingv1/api.php/Apple/differentYearMoneyCount',
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Apple/differentYearMoneySum',
             type: 'POST',
             data: pramaData,
-            success: (data) => {/*
+            success: (data) => {
+
                 var year = [],
-                    count = []
+                    sum = []
 
                 for (var i = 0; i < JSON.parse(data).length; i++) {
                     year.push(JSON.parse(data)[i].year)
-                    count.push(+JSON.parse(data)[i].count)
+                    sum.push(+JSON.parse(data)[i].sum)
                 }
 
                 year.reverse()
-                count.reverse()
+                sum.reverse()
 
-                diffYear.setOption({
+                dymoney.setOption({
                     legend: {
-                        data: ['项目数']
+                        data: ['金额数']
                     },
                     grid: {
                         left: 'left',
                         containLabel: true
                     },
                     xAxis: {
-                        name: '项目数',
+                        name: '金额数',
                         nameRotate: -90,
                         type: 'value',
                         boundaryGap: [0, 0.01],
@@ -367,18 +449,86 @@ $(() => {
                     },
                     series: [
                         {
-                            name: '项目数',
+                            name: '金额数',
                             type: 'bar',
-                            data: count
+                            data: sum
                         }
                     ]
-                })*/
+                })
             }
         })
     }
+
+    //同年份统筹资金的不同类型金额分布图
+    var symoney = echarts.init(document.getElementById('symoney'))
+
+    var getSymoney = (prama) => {
+        var pramaData = ''
+        
+        if (!prama) {
+            pramaData = prama + `unit=${$('#company').html()}`
+        } else {
+            pramaData = prama
+        }
+
+        $.ajax({
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Apple/differentTypeMoneySum',
+            type: 'POST',
+            data: pramaData,
+            success: (data) => {
+
+                var type = ['产业发展', '创业增收', '医疗卫生', '危房改造', '发展教育', '基础设施', '民政社保等兜底', '生态补偿1'],
+                    sum = []
+
+                for (var i = 0; i < JSON.parse(data).length; i++) {
+                    sum.push(+JSON.parse(data)[i].sum)
+                }
+
+                type.reverse()
+                sum.reverse()
+
+                symoney.setOption({
+                    legend: {
+                        data: ['金额数']
+                    },
+                    grid: {
+                        left: 'left',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        name: '金额数',
+                        nameRotate: -90,
+                        type: 'value',
+                        boundaryGap: [0, 0.01],
+                        position: 'top'
+                    },
+                    yAxis: {
+                        type: 'category',
+                        axisTick: {
+                            interval: 0
+                        },
+                        axisLabel: {
+                            interval: 0
+                        },
+                        data: type
+                    },
+                    series: [
+                        {
+                            name: '金额数',
+                            type: 'bar',
+                            data: sum
+                        }
+                    ]
+                })
+            }
+        })
+    }
+
     setTimeout(function () {
         getDiffYear('')
         getSydt('')
+        getDymoney('')
+        getSymoney('')
     }, 1000)
 
 })
