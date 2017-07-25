@@ -83,10 +83,22 @@ $(() => {
             $('#mainpovertyreason').html(JSON.parse(data).data.poor.mainpovertyreason)
 
             if (JSON.parse(data).data.familys.length === 0) {
-                $('.family .unit').addClass('nodata').html('暂无家庭成员信息')
-                $('.photo .unit').addClass('nodata').html('暂无家庭照片信息')
+                $('.family').html('<div class="unit nodata">暂无家庭成员信息</div>')
             } else {
+                for (var i = 0; i < JSON.parse(data).data.familys.length; i++) {
+                    $('.family').append(`<a href="poordetail_family.html?table_id=${app.getUrlPrama('table_id')}&no=${i}" class="unit">${i + 1}.${JSON.parse(data).data.familys[i].name}</a>`)
+                }
                 
+            }
+
+            if (!JSON.parse(data).data.poor.icon) {
+                $('.photo').html('<div class="unit nodata">暂无家庭照片信息</div>')
+            } else {
+                $('.photo').append(
+                    `<div class="unit flex">
+                        <img src="http://test.360guanggu.com${JSON.parse(data).data.poor.icon}">
+                    </div>`
+                )
             }
         }
     })

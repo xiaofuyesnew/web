@@ -112,12 +112,13 @@
     }
     .header {
         height: 60px;
-        width: 100%;
+        padding-left: 10px;
+        width: calc(100% - 10px);
         background-color: #1e82d0;
         color: #fff;
         font-size: 2rem;
         line-height: 60px;
-        text-align: center;
+        text-align: left;
     }
     .u-btngroup {
         height: 30px;
@@ -173,7 +174,6 @@
     font-size: 1.4rem;
     color: #7f7f7f;
     line-height: 40px;
-    display: block;
     .name {
         float: left;
         width: 50%;
@@ -193,7 +193,6 @@
         background-size: 10%;
         text-indent: 20px;
         margin-right: 10px;
-        height: 40px;
     }
     .spots {
         overflow: hidden;
@@ -207,92 +206,61 @@
     margin-left: -10px;
     width: 100vw;
     font-size: 1.4rem;
-    .lists {
-        .listfix {
+    padding-bottom: 71px;
+    .kanban {
+        padding: 5px 15px;
+        background-color: #fff;
+        height: 90px;
+        margin-bottom: 10px;
+        border-top: 1px solid #e2e2e2;
+        border-bottom: 1px solid #e2e2e2;
+        .unit {
+            width: 50%;
             height: 30px;
-        }
-        
-        .wrap {
-            margin-top: -11px;
-            margin-bottom: 10px;
-            .listcont {
-                margin-bottom: -1px;
-                .nodata {
-                    text-align: center;
-                }
-                a.unit {
-                    color: #000;
-                    background: url('../image/right.png') no-repeat;
-                    background-size: 10px 15px;
-                    background-position: right 50%;
-                }
-                .unit {
-                    display: block;
-                    width: 100%;
-                    height: 30px;
-                    line-height: 30px;
-                    .title {
-                        font-weight: bold;
-                    }
-                    .data {
-                        color: #7f7f7f;
-                    }
-                    .long {
-                        max-width: 75%;
-                        display: block;
-                        text-overflow: ellipsis;
-                        overflow: hidden;
-                        white-space: nowrap;
-                    }
-                    .left {
-                        float: left;
-                    }
-                    .right {
-                        float: right;
-                    }
-                }
-                .flex {
-                    display: flex;
-                    justify-content: center;
-                    height: 200px;
-                    img {
-                        width: 50%;
-                    }
-                }
+            line-height: 30px;
+            color: #3f96d5;
+            .title {
+                font-weight: bold;
             }
         }
+        .left {
+            float: left;
+        }
+        .right {
+            float: right;
+            text-align: right;
+        }
+    }
+    .lists {
         .list {
             padding: 5px 15px;
             background-color: #fff;
+            height: 120px;
             margin-bottom: 10px;
             border-top: 1px solid #e2e2e2;
             border-bottom: 1px solid #e2e2e2;
             .unit {
-                width: 100%;
+                width: 50%;
                 height: 30px;
                 line-height: 30px;
                 .title {
                     font-weight: bold;
                 }
             }
-            .header {
-                width: 70%;
-            }
-            .arrow {
-                display: block;
-                width: 30px;
-            }
-            .up {
-                width: 30px;
-                background: url('../image/up.png') no-repeat;
-                background-position: 50%;
-                background-size: 60%;
-            }
-            .down {
-                width: 30px;
-                background: url('../image/down.png') no-repeat;
-                background-position: 50%;
-                background-size: 60%;
+            .unit-h {
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                .hidden {
+                    width: 80%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    float: left;
+                }
+                .title {
+                    font-weight: bold;
+                }
             }
             .left {
                 float: left;
@@ -321,7 +289,6 @@
         font-size: 1.2rem;
         color: #7f7f7f;
         line-height: 40px;
-        display: block;
         .name {
             float: left;
             width: 50%;
@@ -341,7 +308,6 @@
             background-size: 10%;
             text-indent: 20px;
             margin-right: 10px;
-            height: 40px;
         }
         .spots {
             overflow: hidden;
@@ -351,5 +317,18 @@
     }
     .content {
         font-size: 1.2rem;
+    }
+}
+
+@include m-navbar;
+
+.m-navbar {
+    li {
+        width: 50%;
+        height: 100%;
+        a img {
+            width: 32px;
+            height: 32px;
+        }
     }
 }

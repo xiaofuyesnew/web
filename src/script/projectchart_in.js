@@ -10,6 +10,19 @@ $(() => {
     //调用方法
     app.setScreen()
 
+    $.ajax({
+        url: 'http://test.360guanggu.com/fupingv1/api.php/Detail/userType',
+        type: 'POST',
+        data: `uid=${localStorage.uid}`,
+        success: (data) => {
+            if (JSON.parse(data).type === 1) {
+                $('#projectcheck').attr('href', 'projectcheck_xian.html')
+            } else if (JSON.parse(data).type === 2) {
+                $('#projectcheck').attr('href', 'projectcheck_zhen.html')
+            }
+        }
+    })
+
     //获取年份
     $.ajax({
         url: 'http://test.360guanggu.com/fupingv1/api.php/Apple/getYear',
@@ -180,7 +193,6 @@ $(() => {
         data: `uid=${localStorage.uid}`,
         success: (data) => {
             var company = []
-
             for (var i = 0; i < JSON.parse(data).data.length; i++) {
                 company.push(JSON.parse(data).data[i].name)
             }
