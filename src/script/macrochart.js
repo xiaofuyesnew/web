@@ -27,9 +27,16 @@ $(() => {
         } else if ($(this).attr('data-nav') === '2') {
             $('.m-main').children().addClass('hide')
             $($('.m-main .u-main')[1]).removeClass('hide')
+            $($('.subnav .unit')[0]).removeClass('hide')
+            $($('.subnav .unit')[3]).addClass('hide')
         } else if ($(this).attr('data-nav') === '3') {
             $('.m-main').children().addClass('hide')
             $($('.m-main .u-main')[2]).removeClass('hide')
+            $($('.subnav .unit')[3]).removeClass('hide')
+            $($('.subnav .unit')[0]).addClass('hide')
+        } else if ($(this).attr('data-nav') === '4') {
+            $('.m-main').children().addClass('hide')
+            $($('.m-main .u-main')[3]).removeClass('hide')
         }
     })
 
@@ -38,7 +45,7 @@ $(() => {
     var diffYear = echarts.init(document.getElementById('diffYear'))
 
     $.ajax({
-        url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/index',
+        url: 'http://test.360guanggu.com/fupingv1/api.php/Changepoor/index',
         type: 'get',
         success: (data) => {
             var year = [],
@@ -103,7 +110,7 @@ $(() => {
 
         //获取数据
         $.ajax({
-            url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/area',
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Changepoor/area',
             type: 'post',
             data: prama,
             success: (data) => {
@@ -170,7 +177,7 @@ $(() => {
 
         //获取数据
         $.ajax({
-            url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/hushu',
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Changepoor/hushu',
             type: 'post',
             data: prama,
             success: (data) => {
@@ -234,7 +241,7 @@ $(() => {
 
         //获取数据
         $.ajax({
-            url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/hushu_nianfen',
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Changepoor/hushu_nianfen',
             type: 'post',
             data: prama,
             success: (data) => {
@@ -298,7 +305,7 @@ $(() => {
 
         //获取数据
         $.ajax({
-            url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/resource',
+            url: 'http://test.360guanggu.com/fupingv1/api.php/Changepoor/resource',
             type: 'post',
             data: prama,
             success: (data) => {
@@ -318,51 +325,15 @@ $(() => {
                             formatData.push(tmpObj)
                             tmpObj ={}
                             break
-                        case 'birthFunding':
-                            tmpObj.value = +JSON.parse(data).data[value]
-                            tmpObj.name = '计划生育金'
-                            formatData.push(tmpObj)
-                            tmpObj ={}
-                            break
-                        case 'fiveGuarnSubsidy':
-                            tmpObj.value = +JSON.parse(data).data[value]
-                            tmpObj.name = '五保金'
-                            formatData.push(tmpObj)
-                            tmpObj ={}
-                            break
-                        case 'ecoCompensation':
-                            tmpObj.value = +JSON.parse(data).data[value]
-                            tmpObj.name = '生态补偿金'
-                            formatData.push(tmpObj)
-                            tmpObj ={}
-                            break
                         case 'productiveIncome':
                             tmpObj.value = +JSON.parse(data).data[value]
-                            tmpObj.name = '生产经营性收入'
+                            tmpObj.name = '经营性收入'
                             formatData.push(tmpObj)
                             tmpObj ={}
                             break
                         case 'transferredIncome':
                             tmpObj.value = +JSON.parse(data).data[value]
                             tmpObj.name = '转移性收入'
-                            formatData.push(tmpObj)
-                            tmpObj ={}
-                            break
-                        case 'mininumSubsidy':
-                            tmpObj.value = +JSON.parse(data).data[value]
-                            tmpObj.name = '低保金'
-                            formatData.push(tmpObj)
-                            tmpObj ={}
-                            break
-                        case 'pension':
-                            tmpObj.value = +JSON.parse(data).data[value]
-                            tmpObj.name = '养老保险金'
-                            formatData.push(tmpObj)
-                            tmpObj ={}
-                            break
-                        case 'otherTransIncome':
-                            tmpObj.value = +JSON.parse(data).data[value]
-                            tmpObj.name = '其他转移性收入'
                             formatData.push(tmpObj)
                             tmpObj ={}
                             break
@@ -391,13 +362,66 @@ $(() => {
         })
     }
 
+    //产业扶贫统计图
+    var industry = echarts.init(document.getElementById('industry'))
+
+    var getIndustry = (prama) => {
+        
+        //设定默认值
+        if (!prama) {
+            prama = ''
+        }
+
+                industry.setOption({
+                    legend: {
+                        data: ['养殖业', '种植业', '其他']
+                    },
+                    grid: {
+                        left: 'left',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        boundaryGap: [0, 0.01],
+                        position: 'top'
+                    },
+                    yAxis: {
+                        type: 'category',
+                        axisTick: {
+                            interval: 0
+                        },
+                        axisLabel: {
+                            interval: 0
+                        },
+                        data: ['河口乡', '嫘祖镇', '花林寺镇', '旧县镇', '茅坪场镇', '鸣凤镇', '洋坪镇']
+                    },
+                    series: [
+                        {
+                            name: '养殖业',
+                            type: 'bar',
+                            data: [100, 200, 300, 400, 500, 600, 700]
+                        },
+                        {
+                            name: '种植业',
+                            type: 'bar',
+                            data: [123, 321, 456, 789, 784, 983, 238]
+                        },
+                        {
+                            name: '其他',
+                            type: 'bar',
+                            data: [289, 210, 239, 908, 329, 103, 812]
+                        }
+                    ]
+                })
+    }
+
     getDiffArea()
     getSydincome()
     getDydincome()
     getSydincomes()
-
+    getIndustry()
     $.ajax({
-        url: 'http://test.360guanggu.com/yuanan_fupin/api.php/Changepoor/year',
+        url: 'http://test.360guanggu.com/fupingv1/api.php/Changepoor/year',
         type: 'get',
         success: (data) => {
             var jsonData = JSON.parse(data),
@@ -450,6 +474,17 @@ $(() => {
         callback: (indexArr, data) => {
             var prama = `year=${$('#year').html()}&town=${data[0]}`
             getDiffArea(prama)
+        }
+    })
+
+    var areaSelect = new MobileSelect({
+        trigger: '#area',
+        title: '选择镇',
+        wheels: [
+            {data: ['不限', '河口乡', '嫘祖镇', '花林寺镇', '旧县镇', '茅坪场镇', '鸣凤镇', '洋坪镇']}
+        ],
+        callback: (indexArr, data) => {
+            
         }
     })
 

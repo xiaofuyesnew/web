@@ -26,14 +26,13 @@
             <div class="u-title">贫困户清单</div>
             <a class="u-index" href="main.html"></a>
         </div>
-        <div id="map"></div>
         <div class="m-dropdown">
             <div class="u-show">
                 <img src="../image/dropright.png">
                 <span>点击展开搜索</span>
             </div>
         </div>
-        <div class="content">
+        <div class="cont">
             <div class="lists"></div>
         </div>
         <div class="u-mask"></div>
@@ -41,11 +40,15 @@
             <div class="header">搜索</div>
             <div class="unit">
                 <label>姓名</label>
-                <input type="text">
+                <input id="name" type="text">
+            </div>
+            <div class="select">
+                <div class="name">年份</div>
+                <div id="year" class="triger">不限</div>
             </div>
             <div class="select">
                 <div class="name">行政区划</div>
-                <div id="area" class="triger">不限</div>
+                <div id="area" class="triger spots">不限</div>
             </div>
             <div class="select">
                 <div class="name">贫困属性</div>
@@ -61,11 +64,9 @@
             </div>
         </div>
     </div>
-    
+    <div class="msg"></div>
     <!-- build:cordova -->
     <!-- endbuild -->
-    <script src="http://webapi.amap.com/maps?v=1.3&key=bcacfc572017e8cb4c9c51c8a7013d80"></script>
-    <script src="http://webapi.amap.com/ui/1.0/main.js"></script>
     <script src="../js/poorlist.js"></script>
 </body>
 </html>

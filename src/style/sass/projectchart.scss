@@ -3,8 +3,8 @@
 
 #app {
     padding: 10px;
-    background: #f5f5f5;
     position: relative;
+    background-color: #f5f5f5;
 }
 
 .m-header {
@@ -15,22 +15,7 @@
     }
     .u-title {
         @include u-title;
-        width: 89vw;
-        text-indent: -11vw;
-    }
-}
-
-@include m-navbar;
-
-.m-navbar {
-    li {
-        width: 50%;
-        a {
-            img {
-                width: 30px!important;
-                height: 30px!important;
-            }
-        }
+        width: 75vw;
     }
 }
 
@@ -40,14 +25,14 @@
     padding-top: 50px;
     background: #fff;
     height: 50px;
-    color: #7f7f7f;
     .unit {
-        padding-top: 10px;
-        width: calc(100% / 3);
+        padding-top: 18px;
+        width: 50%;
         float: left;
         text-align: center;
         height: 50px;
         font-size: 1.2rem;
+        color: #7f7f7f;
     }
     .blue {
         color: #1e82d0;
@@ -56,18 +41,55 @@
         height: 2px;
         background: #1e82d0;
         width: 65%;
-        margin: 6px auto 0;
+        margin: 14px auto 0;
     }
 }
-
 .hide {
     display: none;
 }
 
+@include u-index;
+
+.m-table {
+    margin: 131px 0 0 -10px;
+    width: 100vw;
+    height: 62px;
+    border-top: 1px solid #e2e2e2;
+    background-color: #fff;
+    .unit {
+        height: 30px;
+        border-bottom: 1px solid #e2e2e2;
+        padding: 0 10px;
+        .cell {
+            height: 30px;
+            line-height: 30px;
+            .name {
+                float: left;
+            }
+            .num {
+                float: right;
+                color: #999;
+            }
+        }
+        .left {
+            padding-right: 10px;
+            width: calc(50% - 11px);
+            border-right: 1px solid #e2e2e2;
+            float: left;
+        }
+        .right {
+            padding-left: 10px;
+            width: calc(50% - 10px);
+            float: right;
+        }
+    }
+}
+
 .m-main {
+    margin-top: 10px;
     .u-main {
         width: 100vw;
-        margin: 10px 0 0 -10px;
+        margin: 20px 0 0 -10px;
         background-color: #fff;
         .scal-s {
             width: 100vw;
@@ -78,6 +100,7 @@
             .header {
                 height: 40px;
                 border-bottom: 1px solid #e2e2e2;
+                margin-bottom: 10px;
                 .title {
                     padding-left: 20px;
                     float: left;
@@ -175,16 +198,102 @@
     }
 }
 
-.show {
-    display: block;
+.m-dropdown {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100vw;
+    .u-show {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 20px;
+        background-color: #f5f5f5;
+        border-top: 1px solid #999;
+        img {
+            width: 12px;
+            height: 12px;
+            margin: 4px 10px 0 0; 
+        }
+    }
+    .u-hide {
+        background-color: #fff;
+        overflow: hidden;
+        height: 0;
+        .u-btngroup {
+            height: 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .u-btn {
+                color: #fff;
+                width: 30%;
+                height: 20px;
+                border-radius: 10px;
+                text-align: center;
+                line-height: 20px;
+            }   
+            .z-blue {
+                background-color: #1e82d0;
+            }
+            .z-yellow {
+                background-color: #ff9a38;
+            }
+        }
+    }
+    .animDown {
+        animation: showHide 0.3s forwards;
+    }
+    .animUp {
+        animation: hideHide 0.3s forwards;
+    }
 }
 
-.hide {
-    display: none;
+@keyframes showHide {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 92px;
+    }
 }
 
-#dydincome {
-    height: 400px;
+@keyframes hideHide {
+    0% {
+        height: 92px;
+    }
+    100% {
+        height: 0;
+    }
+}
+
+.select {
+    width: 100vw;
+    border-bottom: 1px solid #e2e2e2;
+    height: 30px;
+    font-size: 1.4rem;
+    color: #7f7f7f;
+    line-height: 30px;
+    .name {
+        float: left;
+        width: 70%;
+        padding-left: 20px;
+    }
+    .bar-s {
+        width: 1px;
+        height: 20px;
+        margin-top: 5px;
+        float: left;
+        background-color: #e2e2e2;
+    }
+    .triger {
+        float: right;
+        width: calc(30% - 31px);
+        background: url("../image/right.png") no-repeat right 50%;
+        background-size: 10%;
+        text-indent: 20px;
+        margin-right: 10px;
+    }
 }
 
 @media screen and (max-width: 358px) {
@@ -239,4 +348,18 @@
         }
     }
 }
+}
+
+@include m-navbar;
+
+.m-navbar {
+    li {
+        width: 50%;
+        a {
+            img {
+                width: 30px!important;
+                height: 30px!important;
+            }
+        }
+    }
 }

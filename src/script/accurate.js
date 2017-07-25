@@ -37,8 +37,24 @@ $(() => {
                     $('.u-num .right .num').html(jsonData.data.count)
                 }
             })
-        }
+        },
+        showMsg: (msg) => {
+            $('.msg').html(msg).show(() => {
+                $('.msg').css({'opacity': '1'})
+                setTimeout(() => {
+                    $('.msg').css({'opacity': '0'})
+                }, 2000)
+                setTimeout(() => {
+                    $('.msg').hide()
+                }, 3000)
+            })
+        },
     }
+
+    //开发提示
+    $('#dev').click(function () {
+        app.showMsg('本模块开发中...')
+    })
 
     //调用方法
     app.setScreen()
@@ -136,14 +152,3 @@ $(() => {
         }
     })
 })
-
-
-
-/**
-接口信息
-精准识别 批次号和预警人数：http://test.360guanggu.com/yuanan_fupin/api.php/Warn/index?user_id=6
-饼图
-http://test.360guanggu.com/yuanan_fupin/api.php/Warn/warning?user_id=6
-柱状图
-http://test.360guanggu.com/yuanan_fupin/api.php/Warn/village?user_id=6
- */
