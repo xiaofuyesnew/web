@@ -175,7 +175,7 @@
                 line-height: 30px;
                 .name {
                     float: left;
-                    width: 70%;
+                    width: 20%;
                     padding-left: 20px;
                 }
                 .bar-s {
@@ -186,12 +186,16 @@
                     background-color: #e2e2e2;
                 }
                 .triger {
+                    padding-right: 5%;
                     float: right;
                     width: calc(30% - 31px);
-                    background: url("../image/right.png") no-repeat right 50%;
+                    background: url("../image/right.png") no-repeat right 40%;
                     background-size: 10%;
                     text-indent: 20px;
                     margin-right: 10px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
                 }
             }
         }
