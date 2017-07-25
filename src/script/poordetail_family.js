@@ -36,19 +36,30 @@ $(() => {
         type: 'POST',
         data: `table_id=${app.getUrlPrama('table_id')}`,
         success: (data) => {
+            var family = JSON.parse(data).data.familys[+(app.getUrlPrama('no'))]
             console.log(JSON.parse(data).data)
-            
+            console.log(JSON.parse(data).data.familys[+(app.getUrlPrama('no'))])
             $('#name').html(JSON.parse(data).data.poor.name)
             $('#area').html(JSON.parse(data).data.poor.townname + '&nbsp;' + JSON.parse(data).data.poor.villagename)
-            /*
-            $('#sex').html(JSON.parse(data).data.poor.sex)
-            $('#birthday').html(JSON.parse(data).data.poor.birthday)
-            $('#telephone') //暂缺
-            $('#idnumber').html(JSON.parse(data).data.poor.idnumber)
-            $('#homeaddress').html(JSON.parse(data).data.poor.homeaddress)
-            $('#povertyattribute').html(JSON.parse(data).data.poor.povertyattribute)
-            $('#mainpovertyreason').html(JSON.parse(data).data.poor.mainpovertyreason)
-            */
+            $('#familyname').html(family.name)
+            $('#sex').html(family.sex)
+            $('#birthday').html(family.birthday)
+            $('#relation').html(family.relationship)
+            $('#education').html(family.educationdegree)
+            $('#school').html(family.studenstatus)
+            $('#skill').html(family.worksituation)
+            $('#health').html(family.healthcondition)
+            
+
+            if (!family.icon) {
+                $('.photo').html('<div class="unit nodata">暂无家庭照片信息</div>')
+            } else {
+                $('.photo').append(
+                    `<div class="unit flex">
+                        <img src="http://test.360guanggu.com${family.icon}">
+                    </div>`
+                )
+            }
         }
     })
 })

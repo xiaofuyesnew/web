@@ -110,6 +110,14 @@
                         float: right;
                     }
                 }
+                .flex {
+                    display: flex;
+                    justify-content: center;
+                    height: 200px;
+                    img {
+                        width: 50%;
+                    }
+                }
             }
         }
         .list {
