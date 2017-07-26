@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>到村镇资金</title>
+    <link rel="stylesheet" href="../css/projectcheck_t.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="../lib/mobileSelect.css">
+    <link rel="stylesheet" href="../lib/dropload.css">
+    <!-- endbuild -->
+    <!-- build:js -->
+    <script src="../lib/jquery-3.2.1.js"></script>
+    <script src="../lib/mobileSelect.js"></script>
+    <script src="../lib/dropload.js"></script>
+    <!-- endbuild -->
+</head>
+<body>
+    <div id="app">
+        <div class="m-header">
+            <a class="u-back" href="poorresult.html"></a>
+            <div class="u-title">资金拨付去向</div>
+            <a class="u-index" href="main.html"></a>
+        </div>
+        <div class="m-dropdown">
+            <div class="u-show">
+                <img src="../image/dropright.png">
+                <span>点击展开搜索</span>
+            </div>
+        </div>
+        <div class="cont">
+            <div class="kanban">
+                <div class="unit-h">
+                    <span class="title">整合资金汇总：</span>
+                    <span></span>
+                </div>
+                <div class="unit left">
+                    <span class="title">类别:</span>
+                    <span></span>
+                </div>
+                <div class="unit right">
+                    <span class="title">责任单位:</span>
+                    <span></span>
+                </div>
+                <div class="unit left">
+                    <span class="title">项目类型:</span>
+                    <span></span>
+                </div>
+                <div class="unit right">
+                    <span  class="title">整合资金:</span>
+                    <span></span>
+                </div>
+                <div class="unit left">
+                    <span class="title">已拨付资金:</span>
+                    <span></span>
+                </div>
+                <div class="unit right">
+                    <span  class="title">剩余资金:</span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="lists"></div>
+        </div>
+        <div class="u-mask"></div>
+        <div class="u-hide">
+            <div class="header">搜索</div>
+            <div class="unit">
+                <label>项目名称</label>
+                <input id="spname" type="text">
+            </div>
+            <div class="unit">
+                <label>施工单位</label>
+                <input id="unit" type="text">
+            </div>
+            <div class="select">
+                <div class="name">年份</div>
+                <div id="year" class="triger">不限</div>
+            </div>
+            <div class="select">
+                <div class="name">行政区划</div>
+                <div id="category" class="triger spots">不限</div>
+            </div>
+            <div class="select">
+                <div class="name">开始时间</div>
+                <div id="item_subtype" class="triger">不限</div>
+            </div>
+            <div class="select">
+                <div class="name">结束时间</div>
+                <div id="fund_source" class="triger">不限</div>
+            </div>
+            <div class="select">
+                <div class="name">拨付时间</div>
+                <div id="fund_source" class="triger">不限</div>
+            </div>
+            <div class="u-btngroup">
+                <div id="search" class="u-btn z-blue">搜索</div>
+                <div id="reset" class="u-btn z-yellow">重置</div>
+            </div>
+        </div>
+        <ul class="m-navbar">
+            <li>
+                <a href="#">
+                    <img src="../image/poorresult/village-a.png">
+                    <span class="blue">到村镇资金</span>
+                </a>
+            </li>
+            <li>
+                <a href="projectcheck_xian_tp.html">
+                    <img src="../image/poorresult/projresult.png">
+                    <span>到项目资金</span>
+                </a>
+            </li>
+            <li>
+                <a href="projectcheck_xian_ts.html">
+                    <img src="../image/poorresult/person.png">
+                    <span>到个人资金</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="msg"></div>
+    <!-- build:cordova -->
+    <!-- endbuild -->
+    <script src="../js/projectcheck_xian_tt.js"></script>
+</body>
+</html>
