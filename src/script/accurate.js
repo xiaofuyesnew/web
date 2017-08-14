@@ -50,12 +50,7 @@ $(() => {
             })
         },
     }
-
-    //开发提示
-    $('#dev').click(function () {
-        app.showMsg('本模块开发中...')
-    })
-
+    
     //调用方法
     app.setScreen()
     app.getNotice()
