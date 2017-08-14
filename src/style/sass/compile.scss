@@ -1,0 +1,113 @@
+@import 'common/common';
+@import 'common/mixin';
+
+#app {
+    padding: 10px;
+    position: relative;
+}
+
+.m-header {
+    @include m-header;
+    background-color: #1e82d0;
+    .u-back {
+        @include u-back;
+    }
+    .u-title {
+        @include u-title;
+        width: 75vw;
+    }
+}
+
+@include u-index;
+
+@include m-navbar;
+
+.m-navbar {
+    li {
+        width: 50%;
+        height: 100%;
+        a img {
+            width: 32px;
+            height: 32px;
+        }
+    }
+}
+
+@include m-main;
+
+.m-main{
+    .u-num {
+        .unit-l {
+            width: 100%;
+        }
+    }
+}
+
+#zPie {
+    margin: 0 auto;
+    width: 300px;
+    height: 200px;
+}
+#cBar {
+    margin: 0 auto;
+    width: 350px;
+    height: 3000px;
+}
+
+.u-block {
+    width: 100vw;
+    margin-left: -10px;
+    position: relative;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background: url("../image/accurate/tip.png") no-repeat;
+    background-size: 40px auto;
+    background-position: left 10px;
+    margin-bottom: 10px;
+}
+
+.u-pie {
+    height: 200px;
+    &::before {
+        content: "镇";
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        color: #fff;
+        font-size: 1.6rem;
+        z-index: 0;
+    }
+}
+
+.u-bar {
+    min-height: 200px;
+    &::before {
+        content: "村";
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        color: #fff;
+        font-size: 1.6rem;
+        z-index: 0;
+    }
+}
+
+.u-bigdata {
+    width: 100vw;
+    margin-left: -10px;
+    margin-bottom: 10px;
+    border-top: 1px solid #e2e2e2;
+    .unit {
+        padding: 0 10px;
+        height: 30px;
+        line-height: 30px;
+        border-bottom: 1px solid #e2e2e2;
+        .title {
+            font-weight: bold;
+        }
+        .num {
+            float: right;
+            
+        }
+    }
+}
