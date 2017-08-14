@@ -5,33 +5,12 @@ $(() => {
         setScreen: () => {
             app.el.css({"height": `${window.innerHeight - 20}px`})
         },
-        getNotice: () => {
-            var notice = 1
-            var ntcNum = 6
-            if (notice) {
-                $('.u-notice').css({
-                    'background': 'url("../image/noticebell-spot.png") no-repeat',
-                    'background-size': '28px',
-        'background-position': '0 16px'
-                })
-                if (ntcNum > 9) {
-                    $('.ntc-num').html('')
-                } else {
-                    $('.ntc-num').html(ntcNum)
-                }
-            } else {
-                $('.u-notice').css({
-                    'background': 'url("../../image/noticebell-nospot.png") no-repeat',
-                    'background-size': '28px',
-        'background-position': '0 16px'
-                })
-            }
-        },
         appAjax_1: () => {
             $.ajax({
                 type: "get",
-                url: "http://test.360guanggu.com/yuanan_fupin/api.php/Warn/index?user_id=6",
+                url: `http://www.hiphoon.com/api.php/Warn/index?user_id=${localStorage.uid}`,
                 success: (data) => {
+                    console.log(JSON.parse(data))
                     var jsonData = JSON.parse(data)
                     $('.u-num .left .num').html(jsonData.data.batch)
                     $('.u-num .right .num').html(jsonData.data.count)
@@ -53,7 +32,6 @@ $(() => {
     
     //调用方法
     app.setScreen()
-    app.getNotice()
 
         //预警批次和人数
         app.appAjax_1()
@@ -63,7 +41,7 @@ $(() => {
 
     $.ajax({
         type: "get",
-        url: "http://test.360guanggu.com/yuanan_fupin/api.php/Warn/warning?user_id=6",
+        url: `http://www.hiphoon.com/api.php/Warn/warning?user_id=${localStorage.uid}`,
         success: (data) => {
             var jsonData = []
             for (var i = 0; i < 7; i++) {
@@ -93,7 +71,7 @@ $(() => {
     
     $.ajax({
         type: "get",
-        url: "http://test.360guanggu.com/yuanan_fupin/api.php/Warn/village?user_id=6",
+        url: `http://www.hiphoon.com/api.php/Warn/village?user_id=${localStorage.uid}`,
         success: (data) => {
             var village = [],
                 family = [],
