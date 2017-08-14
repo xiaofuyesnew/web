@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>查漏补缺</title>
+    <link rel="stylesheet" href="../css/accurate.css">
+    <!-- build:js -->
+    <script src="../lib/jquery-3.2.1.js"></script>
+    <script src="../lib/echarts.js"></script>
+    <!-- endbuild -->
+</head>
+<body>
+    <div id="app">
+        <div class="m-header">
+            <a class="u-back" href="main.html"></a>
+            <div class="u-title">查漏补缺</div>
+            <a class="u-index" href="main.html"></a>
+        </div>
+        <div class="m-main">
+            <div class="u-num">
+                <div class="unit left">
+                    <span class="title">预警批次</span><br>
+                    <span class="num"></span>
+                </div>
+                <div class="unit right">
+                    <span class="title">预警人数</span><br>
+                    <span class="num"></span>
+                </div>
+            </div>
+            <div class="u-block u-pie">
+                <div id="zPie"></div>
+            </div>
+            <div class="u-block u-bar">
+                <div id="cBar"></div>
+            </div>
+        </div>
+        <ul class="m-navbar">
+            <li>
+                <a href="accurate.html">
+                    <img src="../image/accurate/accurate.png">
+                    <span>精准识别</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" id="dev">
+                    <img src="../image/accurate/compile-a.png">
+                    <span class="blue">政策比对</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="msg"></div>
+    <!-- build:cordova -->
+    <!-- endbuild -->
+    <script src="../js/accurate.js"></script>
+</body>
+</html>
