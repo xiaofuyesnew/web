@@ -8,7 +8,7 @@ $(() => {
         appAjax_1: () => {
             $.ajax({
                 type: "get",
-                url: `http://www.hiphoon.com/api.php/Warn/index?user_id=${localStorage.uid}`,
+                url: `http://120.76.203.56:8002/api.php/Warn/index?uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
                 success: (data) => {
                     console.log(JSON.parse(data))
                     var jsonData = JSON.parse(data)
@@ -41,7 +41,7 @@ $(() => {
 
     $.ajax({
         type: "get",
-        url: `http://www.hiphoon.com/api.php/Warn/warning?user_id=${localStorage.uid}`,
+        url: `http://120.76.203.56:8002/api.php/Warn/warning?uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         success: (data) => {
             var jsonData = []
             for (var i = 0; i < 7; i++) {
@@ -71,11 +71,9 @@ $(() => {
     
     $.ajax({
         type: "get",
-        url: `http://www.hiphoon.com/api.php/Warn/village?user_id=${localStorage.uid}`,
+        url: `http://120.76.203.56:8002/api.php/Warn/village?uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         success: (data) => {
-            var village = [],
-                family = [],
-                persons = []
+            var [village, family, persons] = [[], [], []]
 
             for (var i = 0; i < 117; i++) {
                 village[i] = JSON.parse(data)[i].text
