@@ -12,6 +12,7 @@
     <!-- build:js -->
     <script src="lib/jquery-3.2.1.js"></script>
     <!-- endbuild -->
+    <script src="../cordova.js"></script>
 </head>
 <body>
     <div id="app">
@@ -28,8 +29,8 @@
                     </div>
                 </div>
                 <div class="u-check">
-                    <input id="code" type="text" placeholder="验证码">
-                    <img src="http://test.360guanggu.com/fupingv1/api.php/Login/get_codes?PHPSESSID=code">
+                    <input id="code" type="text" placeholder="验证码" onKeyUp="value=value.replace(/[^\d]/g,'') "onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                    <img src="http://120.76.203.56:8002/api.php/Login/get_codes?PHPSESSID=code">
                 </div>
                 <button type="button">登录</button>
             </form>

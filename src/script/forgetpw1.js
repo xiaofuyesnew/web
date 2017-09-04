@@ -16,7 +16,7 @@ $(() => {
                     app.showMsg('邮箱格式不正确')
                 } else {
                     $.ajax({
-                        url: 'http://test.360guanggu.com/fupingv1/api.php/Login/add',
+                        url: 'http://120.76.203.56:8002/api.php/Login/add',
                         type: "POST",
                         data: prama,
                         success: (data) => {
@@ -33,7 +33,7 @@ $(() => {
                     code = `code=${$('#code').val()}`,
                     prama = `${username}&${mail}&${code}`
                 $.ajax({
-                    url: 'http://test.360guanggu.com/fupingv1/api.php/Login/checkEmailCode',
+                    url: 'http://120.76.203.56:8002/api.php/Login/checkEmailCode',
                     type: "POST",
                     data: prama,
                     success: (data) => {
