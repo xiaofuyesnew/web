@@ -1,17 +1,5 @@
 $(() => {
 
-    function onDeviceReady() {
-        if (app.getUrlPrama('logout') === '1') {
-            window.plugins.jPushPlugin.setTagsWithAlias([], '', function () {
-                // Success callback
-                console.log(tags + ' - ' + alias)
-            })
-            localStorage.uid = ''
-        }
-    }
-
-    document.addEventListener("deviceready", onDeviceReady, false)
-
     //创建根节点对象
     var app = {
         el: $('#app'),
@@ -62,7 +50,7 @@ $(() => {
                         }
                         localStorage.logout = '0'
                         app.lastLogin()
-                        window.location = 'html/poorlist.html'
+                        window.location = 'html/main.html'
                     } else {
                         if (JSON.parse(data).info === '验证码错误') {
                             app.checkCode()
@@ -111,6 +99,10 @@ $(() => {
         }
     }
 
+    if (app.getUrlPrama('logout') === '1') {
+        localStorage.uid = ''
+    }
+    
     //调用方法
     app.setScreen()
 
