@@ -45,7 +45,7 @@ $(() => {
     var diffYear = echarts.init(document.getElementById('diffYear'))
 
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Changepoor/index',
+        url: `http://120.76.203.56:8002/api.php/Changepoor/index?uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         type: 'get',
         success: (data) => {
             var year = [],
@@ -110,9 +110,9 @@ $(() => {
 
         //获取数据
         $.ajax({
-            url: 'http://test.360guanggu.com/fupingv1/api.php/Changepoor/area',
+            url: `http://120.76.203.56:8002/api.php/Changepoor/area`,
             type: 'post',
-            data: prama,
+            data: `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&${prama}`,
             success: (data) => {
                 var text = [],
                     nonum = [],
@@ -177,9 +177,9 @@ $(() => {
 
         //获取数据
         $.ajax({
-            url: 'http://test.360guanggu.com/fupingv1/api.php/Changepoor/hushu',
+            url: 'http://120.76.203.56:8002/api.php/Changepoor/hushu',
             type: 'post',
-            data: prama,
+            data: `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&${prama}`,
             success: (data) => {
                 var rand = []
                 for (var i = 0; i < JSON.parse(data).data.length; i++) {
@@ -241,10 +241,12 @@ $(() => {
 
         //获取数据
         $.ajax({
-            url: 'http://test.360guanggu.com/fupingv1/api.php/Changepoor/hushu_nianfen',
+            url: `http://120.76.203.56:8002/api.php/Changepoor/hushu_nianfen`,
             type: 'post',
-            data: prama,
+            data: `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&${prama}`,
             success: (data) => {
+                //console.log(JSON.parse(data))
+                
                 var year = [],
                     num = []
                 for (var i = 0; i < JSON.parse(data).data.length; i++) {
@@ -305,9 +307,9 @@ $(() => {
 
         //获取数据
         $.ajax({
-            url: 'http://test.360guanggu.com/fupingv1/api.php/Changepoor/resource',
+            url: `http://120.76.203.56:8002/api.php/Changepoor/resource`,
             type: 'post',
-            data: prama,
+            data: `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&${prama}`,
             success: (data) => {
                 var formatData = [],
                     tmpObj = {}
@@ -372,6 +374,23 @@ $(() => {
             prama = ''
         }
 
+        $.ajax({
+            url: 'http://120.76.203.56:8002/api.php/macro/industry',
+            type: 'POST',
+            data: `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&area=${prama}`,
+            success: (data) => {
+                var locData = [],
+                    aniData = [],
+                    plaData = [],
+                    etrData = []
+                console.log(JSON.parse(data).data)
+                for (var i = 0; i < JSON.parse(data).data.length; i++) {
+                    locData.push(JSON.parse(data).data[i].name)
+                    aniData.push(+JSON.parse(data).data[i].axis[0].count)
+                    plaData.push(+JSON.parse(data).data[i].axis[1].count)
+                    etrData.push(+JSON.parse(data).data[i].axis[2].count)
+                }
+
                 industry.setOption({
                     legend: {
                         data: ['养殖业', '种植业', '其他']
@@ -393,26 +412,28 @@ $(() => {
                         axisLabel: {
                             interval: 0
                         },
-                        data: ['河口乡', '嫘祖镇', '花林寺镇', '旧县镇', '茅坪场镇', '鸣凤镇', '洋坪镇']
+                        data: locData
                     },
                     series: [
                         {
                             name: '养殖业',
                             type: 'bar',
-                            data: [100, 200, 300, 400, 500, 600, 700]
+                            data: aniData
                         },
                         {
                             name: '种植业',
                             type: 'bar',
-                            data: [123, 321, 456, 789, 784, 983, 238]
+                            data: plaData
                         },
                         {
                             name: '其他',
                             type: 'bar',
-                            data: [289, 210, 239, 908, 329, 103, 812]
+                            data: etrData
                         }
                     ]
                 })
+            }
+        })
     }
 
     getDiffArea()
@@ -421,7 +442,7 @@ $(() => {
     getSydincomes()
     getIndustry()
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Changepoor/year',
+        url: `http://120.76.203.56:8002/api.php/Changepoor/year?uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         type: 'get',
         success: (data) => {
             var jsonData = JSON.parse(data),
@@ -484,7 +505,11 @@ $(() => {
             {data: ['不限', '河口乡', '嫘祖镇', '花林寺镇', '旧县镇', '茅坪场镇', '鸣凤镇', '洋坪镇']}
         ],
         callback: (indexArr, data) => {
-            
+            if (data[0] !== '不限') {
+                getIndustry(data[0])
+            } else {
+                getIndustry()
+            }
         }
     })
 

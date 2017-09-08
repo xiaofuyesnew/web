@@ -97,7 +97,7 @@ $(() => {
 
     //获取地域
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/areaList?pid=420525000000',
+        url: `http://120.76.203.56:8002/api.php/Macro/areaList?pid=420525000000&uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         type: 'GET',
         success: (data) => {
             var jsonData = JSON.parse(data)
@@ -116,7 +116,7 @@ $(() => {
 
     //获取年份
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/yearList',
+        url: `http://120.76.203.56:8002/api.php/Macro/yearList?uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         type: 'GET',
         success: (data) => {
             var jsonData = JSON.parse(data),
@@ -189,10 +189,10 @@ $(() => {
             areaData = 'area=远安县'
         }
 
-        prama = `${yearData}&${areaData}&${conditionData}&${baseData}`
+        prama = `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&${yearData}&${areaData}&${conditionData}&${baseData}`
 
         $.ajax({
-            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/axis',
+            url: 'http://120.76.203.56:8002/api.php/Macro/axis',
             type: 'POST',
             data: prama,
             success: (data) => {
@@ -273,10 +273,10 @@ $(() => {
             areaData = 'area=远安县'
         }
 
-        prama = `${yearData}&${areaData}&${conditionData}&${baseData}`
+        prama = `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&${yearData}&${areaData}&${conditionData}&${baseData}`
 
         $.ajax({
-            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/axis',
+            url: 'http://120.76.203.56:8002/api.php/Macro/axis',
             type: 'POST',
             data: prama,
             success: (data) => {
@@ -357,10 +357,10 @@ $(() => {
             areaData = 'area=远安县'
         }
 
-        prama = `${yearData}&${areaData}&${conditionData}&${baseData}`
+        prama = `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&${yearData}&${areaData}&${conditionData}&${baseData}`
 
         $.ajax({
-            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/axis',
+            url: 'http://120.76.203.56:8002/api.php/Macro/axis',
             type: 'POST',
             data: prama,
             success: (data) => {
@@ -433,10 +433,10 @@ $(() => {
             areaData = 'area=远安县'
         }
 
-        prama = `${yearData}&${areaData}&${conditionData}&${baseData}`
+        prama = `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&${yearData}&${areaData}&${conditionData}&${baseData}`
 
         $.ajax({
-            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/axis',
+            url: 'http://120.76.203.56:8002/api.php/Macro/axis',
             type: 'POST',
             data: prama,
             success: (data) => {
@@ -509,10 +509,10 @@ $(() => {
             areaData = 'area=远安县'
         }
 
-        prama = `${yearData}&${areaData}&${conditionData}&${baseData}`
+        prama = `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&${yearData}&${areaData}&${conditionData}&${baseData}`
 
         $.ajax({
-            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/axis',
+            url: 'http://120.76.203.56:8002/api.php/Macro/axis',
             type: 'POST',
             data: prama,
             success: (data) => {
@@ -589,10 +589,10 @@ $(() => {
 
         baseData = base ? `base=${base}` : 'base=1'
 
-        prama = `${yearData}&${areaData}&${conditionData}&${baseData}`
+        prama = `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&${yearData}&${areaData}&${conditionData}&${baseData}`
 
         $.ajax({
-            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/axis',
+            url: 'http://120.76.203.56:8002/api.php/Macro/axis',
             type: 'POST',
             data: prama,
             success: (data) => {

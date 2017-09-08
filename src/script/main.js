@@ -25,10 +25,17 @@ $(() => {
         'background-position': 'left center'
                 })
             }
+        },
+        logOut: () => {
+            $('.u-logout').click(function () {
+                localStorage.logout = '1'
+                window.location = '../index.html?logout=1'
+            })
         }
     }
 
     //调用方法
     app.setScreen()
     app.getNotice()
+    app.logOut()
 })

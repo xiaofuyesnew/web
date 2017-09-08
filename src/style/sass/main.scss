@@ -12,13 +12,21 @@
     .u-title {
         @include u-title;
         width: 78vw;
-        margin-left: 11vw;
     }
     .u-notice {
         @include u-notice;
         .ntc-num {
             @include ntc-num;
         }
+    }
+    .u-logout {
+        display: block;
+        float: left;
+        width: 11vw;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        font-size: 1.4rem;
     }
 }
 

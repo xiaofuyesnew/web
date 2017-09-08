@@ -25,22 +25,38 @@
             <div class="u-num">
                 <div class="unit unit-l">
                     <span class="title">预警批次</span><br>
-                    <span class="num"></span>
+                    <span id="num0" class="num"></span>
                 </div>
             </div>
             <div class="u-bigdata">
-                
                 <div class="unit">
                     <span class="title">应享受政策但未享受人数</span>
-                    <span class="num">111</span>
+                    <span id="num1" class="num"></span>
                 </div>
                 <div class="unit">
                     <span class="title">应享受政策人数</span>
-                    <span class="num">222</span>
+                    <span id="num2" class="num"></span>
                 </div>
                 <div class="unit">
                     <span class="title">已享受政策人数</span>
-                    <span class="num">333</span>
+                    <span id="num3" class="num"></span>
+                </div>
+            </div>
+            <div class="subnav">
+                <div class="unit blue" data-nav="1">
+                    <span>应享受政策</span><br>
+                    <span>但未享受人员清单</span>
+                    <div class="bar"></div>
+                </div>
+                <div class="unit" data-nav="2">
+                    <span>应享受政策</span><br>
+                    <span>人员清单</span>
+                    <div class="bar hide"></div>
+                </div>
+                <div class="unit" data-nav="3">
+                    <span>已享受政策</span><br>
+                    <span>人员清单</span>
+                    <div class="bar hide"></div>
                 </div>
             </div>
             <div class="u-block u-pie">
@@ -60,7 +76,7 @@
             <li>
                 <a href="#" id="dev">
                     <img src="../image/accurate/compile-a.png">
-                    <span class="blue">政策比对</span>
+                    <span class="blue">查漏补缺</span>
                 </a>
             </li>
         </ul>
@@ -68,6 +84,6 @@
     <div class="msg"></div>
     <!-- build:cordova -->
     <!-- endbuild -->
-    <script src="../js/accurate.js"></script>
+    <script src="../js/compile.js"></script>
 </body>
 </html>
