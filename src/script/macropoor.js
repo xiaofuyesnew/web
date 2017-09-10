@@ -108,9 +108,9 @@ $(() => {
             index = 0
 
         if (!year || year === '不限') {
-            prama = `filingYear=2017`
+            prama = `filingYear=2017&uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`
         } else {
-            prama = `filingYear=${year}`
+            prama = `filingYear=${year}&uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`
         }
 
         if (mapMarker !== []) {
@@ -118,7 +118,7 @@ $(() => {
         }   
 
         $.ajax({
-            url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/map',
+            url: 'http://120.76.203.56:8002/api.php/Macro/map',
             type: 'POST',
             data: prama,
             async: false,
@@ -149,7 +149,7 @@ $(() => {
 
     //获取地域
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/areaList?pid=420525000000',
+        url: `http://120.76.203.56:8002/api.php/Macro/areaList?pid=420525000000&uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         type: 'GET',
         success: (data) => {
             var jsonData = JSON.parse(data)
@@ -168,7 +168,7 @@ $(() => {
 
     //获取年份
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/yearList',
+        url: `http://120.76.203.56:8002/api.php/Macro/yearList?uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         type: 'GET',
         success: (data) => {
             var jsonData = JSON.parse(data),

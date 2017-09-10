@@ -21,9 +21,9 @@ $(() => {
     app.setScreen()
 
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Detail/userType',
+        url: 'http://120.76.203.56:8002/api.php/Detail/userType',
         type: 'POST',
-        data: `uid=${localStorage.uid}`,
+        data: `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         success: (data) => {
             if (JSON.parse(data).type === 1) {
                 $('#projectcheck').attr('href', 'projectcheck_xian.html')
