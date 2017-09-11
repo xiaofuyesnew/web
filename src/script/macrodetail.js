@@ -516,6 +516,7 @@ $(() => {
             type: 'POST',
             data: prama,
             success: (data) => {
+                console.log(JSON.parse(data))
                 var jsonData = JSON.parse(data).data.axis,
                     nameData = [],
                     numData = []
