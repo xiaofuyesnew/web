@@ -10,7 +10,7 @@ $(() => {
                 type: "get",
                 url: `http://120.76.203.56:8002/api.php/Warn/index?uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
                 success: (data) => {
-                    console.log(JSON.parse(data))
+                    //console.log(JSON.parse(data))
                     var jsonData = JSON.parse(data)
                     $('.u-num .left .num').html(jsonData.data.batch)
                     $('.u-num .right .num').html(jsonData.data.count)
@@ -43,11 +43,16 @@ $(() => {
         type: "get",
         url: `http://120.76.203.56:8002/api.php/Warn/warning?uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         success: (data) => {
+            console.log(JSON.parse(data))
             var jsonData = []
             for (var i = 0; i < 7; i++) {
                 jsonData[i] = {value: +JSON.parse(data)[i].num, name: JSON.parse(data)[i].text}
             }
             zPie.setOption({
+                tooltip : {
+                    trigger: 'item',
+                    formatter: '{b}<br>{c}人 {d}%'
+                },
                 series : [
                     {
                         type: 'pie',
@@ -111,12 +116,26 @@ $(() => {
                     {
                         name: '贫困户数',
                         type: 'bar',
-                        data: family
+                        data: family,
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: '{c}',
+                                position: 'right'
+                            }
+                        }
                     },
                     {
                         name: '贫困人口数',
                         type: 'bar',
-                        data: persons
+                        data: persons,
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: '{c}',
+                                position: 'right'
+                            }
+                        }
                     }
                 ]
             })

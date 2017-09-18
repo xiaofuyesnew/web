@@ -86,12 +86,26 @@ $(() => {
                     {
                         name: '贫困人口数',
                         type: 'bar',
-                        data: nopeople
+                        data: nopeople,
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: '{c}',
+                                position: 'right'
+                            }
+                        }
                     },
                     {
                         name: '脱贫人口数',
                         type: 'bar',
-                        data: people
+                        data: people,
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: '{c}',
+                                position: 'right'
+                            }
+                        }
                     }
                 ]
             })

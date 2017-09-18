@@ -31,6 +31,10 @@ $(() => {
                         })
                     }
                     zPie.setOption({
+                        tooltip : {
+                            trigger: 'item',
+                            formatter: '{b}<br>{c}人 {d}%'
+                        },
                         series : [
                             {
                                 type: 'pie',
@@ -81,7 +85,14 @@ $(() => {
                             {
                                 name: '人口数',
                                 type: 'bar',
-                                data: barData
+                                data: barData,
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        formatter: '{c}',
+                                        position: 'right'
+                                    }
+                                }
                             }
                         ]
                     })

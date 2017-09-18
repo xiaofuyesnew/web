@@ -24,6 +24,21 @@ $(() => {
                 return unescape(r[2])
             } 
             return null
+        },
+        showSingleImg: (pick, img) => {
+            //添加节点
+            $('body').append(`
+                <div id="${pick.substr(1)}Big" class="imgshow">
+                    <img src="${img}">
+                    <div class="quit"></div>
+                </div>
+            `)
+            $(pick).click(function () {
+                $(`${pick}Big`).show()
+            })
+            $('.quit').click(function () {
+                $('.imgshow').hide()
+            })
         }
     }
 
@@ -67,11 +82,12 @@ $(() => {
     })
 
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/poorDetail',
+        url: 'http://120.76.203.56:8002/api.php/Duty/poorDetail',
         type: 'POST',
-        data: `table_id=${app.getUrlPrama('table_id')}`,
+        data: `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&table_id=${app.getUrlPrama('table_id')}`,
         success: (data) => {
             console.log(JSON.parse(data).data)
+            $('.uploader').attr('data-year', JSON.parse(data).data.poor.filingyear)
             $('#name').html(JSON.parse(data).data.poor.name)
             $('#area').html(JSON.parse(data).data.poor.townname + '&nbsp;' + JSON.parse(data).data.poor.villagename)
             $('#sex').html(JSON.parse(data).data.poor.sex)
@@ -81,6 +97,15 @@ $(() => {
             $('#homeaddress').html(JSON.parse(data).data.poor.homeaddress)
             $('#povertyattribute').html(JSON.parse(data).data.poor.povertyattribute)
             $('#mainpovertyreason').html(JSON.parse(data).data.poor.mainpovertyreason)
+            $('#otherpovertyreasons').html(JSON.parse(data).data.poor.otherpovertyreasons)
+            $('#redyellowcard').html(JSON.parse(data).data.poor.redyellowcard)
+            $('#familysize').html(JSON.parse(data).data.poor.familysize)
+            $('#backpoor').html(JSON.parse(data).data.poor.backpoor)
+            $('#backpoorreason').html(JSON.parse(data).data.poor.backpoorreason)
+            $('#isoupoor').html(JSON.parse(data).data.poor.isoupoor)
+            $('#outpooryear').html(JSON.parse(data).data.poor.outpooryear)
+            $('#ishardpoor').html(JSON.parse(data).data.poor.ishardpoor)
+            
 
             if (JSON.parse(data).data.familys.length === 0) {
                 $('.family').html('<div class="unit nodata">暂无家庭成员信息</div>')
@@ -96,9 +121,10 @@ $(() => {
             } else {
                 $('.photo').append(
                     `<div class="unit flex">
-                        <img src="http://test.360guanggu.com${JSON.parse(data).data.poor.icon}">
+                        <img id="masterIcon" src="${JSON.parse(data).data.poor.icon}">
                     </div>`
                 )
+                app.showSingleImg('#masterIcon', JSON.parse(data).data.poor.icon)
             }
         }
     })

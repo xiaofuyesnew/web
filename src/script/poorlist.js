@@ -50,7 +50,7 @@ $(() => {
     })
 
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/yearList',
+        url: `http://120.76.203.56:8002/api.php/Macro/yearList?uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         type: 'get',
         success: (data) => {
             var jsonData = JSON.parse(data),
@@ -70,7 +70,7 @@ $(() => {
 
     //获取地域
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/areaList?pid=420525000000',
+        url: `http://120.76.203.56:8002/api.php/Macro/areaList?pid=420525000000&uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         type: 'GET',
         success: (data) => {
             var jsonData = JSON.parse(data),
@@ -78,7 +78,7 @@ $(() => {
                 cun = [{id:'0',value:'不限'}]
             for (var i = 0; i < jsonData.data.length; i++) {
                 $.ajax({
-                    url: `http://test.360guanggu.com/fupingv1/api.php/Macro/areaList?pid=${jsonData.data[i].id}`,
+                    url: `http://120.76.203.56:8002/api.php/Macro/areaList?pid=${jsonData.data[i].id}&uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
                     type: 'GET',
                     async: false,
                     success: (data) => {
@@ -114,12 +114,12 @@ $(() => {
 
     //获取贫困属性
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/attrList?type=JDLK_POVERTY_ATTR',
+        url: `http://120.76.203.56:8002/api.php/Macro/attrList?type=JDLK_POVERTY_ATTR&uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         type: 'GET',
         success: (data) => {
             var jsonData = JSON.parse(data),
                 poor =['不限']
-
+            
             for (var i = 0; i < jsonData.data.length; i++) {
                 poor.push(jsonData.data[i].text)
             }
@@ -136,12 +136,12 @@ $(() => {
 
     //获取脱贫属性
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/attrList?type=DIC_OUT_POOR',
+        url: `http://120.76.203.56:8002/api.php/Macro/attrList?type=DIC_OUT_POOR&uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}`,
         type: 'GET',
         success: (data) => {
             var jsonData = JSON.parse(data),
                 npoor =['不限']
-
+                
             for (var i = 0; i < jsonData.data.length; i++) {
                 npoor.push(jsonData.data[i].text)
             }
@@ -159,7 +159,7 @@ $(() => {
     //按需加载
     function needLoad(year, name, area, poor, npoor) {
         var page = 0,
-            prama = ''
+            prama = `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&`
 
         if (year === '不限') {
             prama += `filingYear=&`
@@ -196,7 +196,7 @@ $(() => {
                 newPage += `page=${page}`
                 $.ajax({
                     type: 'POST',
-                    url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/poorList',
+                    url: 'http://120.76.203.56:8002/api.php/Macro/poorList',
                     data: prama + newPage,
                     dataType: 'json',
                     success: function (data) {
@@ -267,14 +267,5 @@ $(() => {
         needLoad(year, name, area, poor, npoor)
 
         getBack()
-    })
-
-    $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/poorDetail',
-        type: 'POST',
-        data: 'table_id=30',
-        success: (data) => {
-            console.log(JSON.parse(data))
-        }
     })
 })
