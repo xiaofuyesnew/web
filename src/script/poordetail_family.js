@@ -24,6 +24,20 @@ $(() => {
                 return unescape(r[2])
             } 
             return null
+        },
+        showSingleImg: (pick, img) => {
+            //添加节点
+            $('body').append(`
+                <div id="${pick.substr(1)}Big" class="imgshow">
+                    <img src="${img}">
+                    <div class="quit"></div>
+                </div>`)
+            $(pick).click(function () {
+                $(`${pick}Big`).show()
+            })
+            $('.quit').click(function () {
+                $('.imgshow').hide()
+            })
         }
     }
 
@@ -32,23 +46,30 @@ $(() => {
     console.log(app.getUrlPrama('table_id'))
 
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/poorDetail',
+        url: 'http://120.76.203.56:8002/api.php/Duty/poorDetail',
         type: 'POST',
-        data: `table_id=${app.getUrlPrama('table_id')}`,
+        data: `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&table_id=${app.getUrlPrama('table_id')}`,
         success: (data) => {
             var family = JSON.parse(data).data.familys[+(app.getUrlPrama('no'))]
             console.log(JSON.parse(data).data)
             console.log(JSON.parse(data).data.familys[+(app.getUrlPrama('no'))])
+            $('.uploader').attr('data-year', JSON.parse(data).data.poor.filingyear)
+            $('.uploader').attr('data-family', family.table_id)
             $('#name').html(JSON.parse(data).data.poor.name)
             $('#area').html(JSON.parse(data).data.poor.townname + '&nbsp;' + JSON.parse(data).data.poor.villagename)
             $('#familyname').html(family.name)
             $('#sex').html(family.sex)
+            $('#idnumber').html(family.idnumber)
             $('#birthday').html(family.birthday)
             $('#relation').html(family.relationship)
             $('#education').html(family.educationdegree)
             $('#school').html(family.studenstatus)
-            $('#skill').html(family.worksituation)
+            $('#worksituation').html(family.worksituation)
+            $('#workingmonths').html(family.workingmonths)
+            $('#workplace').html(family.workplace)
+            $('#laborcondition').html(family.laborcondition)
             $('#health').html(family.healthcondition)
+            $('#marraycondition').html(family.marraycondition)
             
 
             if (!family.icon) {
@@ -56,9 +77,10 @@ $(() => {
             } else {
                 $('.photo').append(
                     `<div class="unit flex">
-                        <img src="http://test.360guanggu.com${family.icon}">
+                        <img id="familyIcon" src="${family.icon}">
                     </div>`
                 )
+                app.showSingleImg('#familyIcon', family.icon)
             }
         }
     })

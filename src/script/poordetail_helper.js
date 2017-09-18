@@ -24,6 +24,21 @@ $(() => {
                 return unescape(r[2])
             } 
             return null
+        },
+        showSingleImg: (pick, img) => {
+            //添加节点
+            $('body').append(`
+                <div id="${pick.substr(1)}Big" class="imgshow">
+                    <img src="${img}">
+                    <div class="quit"></div>
+                </div>
+            `)
+            $(pick).click(function () {
+                $(`${pick}Big`).show()
+            })
+            $('.quit').click(function () {
+                $('.imgshow').hide()
+            })
         }
     }
 
@@ -69,34 +84,31 @@ $(() => {
     })
 
     $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/poorDetail',
+        url: 'http://120.76.203.56:8002/api.php/Duty/poorDetail',
         type: 'POST',
-        data: `table_id=${app.getUrlPrama('table_id')}`,
+        data: `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&table_id=${app.getUrlPrama('table_id')}`,
         success: (data) => {
             console.log(JSON.parse(data).data)
-
             $('#name').html(JSON.parse(data).data.poor.name)
             $('#area').html(JSON.parse(data).data.poor.townname + '&nbsp;' + JSON.parse(data).data.poor.villagename)
             $('#dutyname').html(JSON.parse(data).data.dutys[0].name)
             $('#sex').html(JSON.parse(data).data.dutys[0].sex)
             $('#telephone').html(JSON.parse(data).data.dutys[0].contacnumber)
             $('#company').html(JSON.parse(data).data.dutys[0].orgname)
-
-            $('.photo').append(`
-                <div class="unit flex">
-                    <img src='http://test.360guanggu.com${JSON.parse(data).data.dutys[0].photo}'
-                </div>
-            `)
-            /*
-            $('#sex').html(JSON.parse(data).data.poor.sex)
-            $('#birthday').html(JSON.parse(data).data.poor.birthday)
-            $('#telephone') //暂缺
-            $('#idnumber').html(JSON.parse(data).data.poor.idnumber)
-            $('#homeaddress').html(JSON.parse(data).data.poor.homeaddress)
-            $('#povertyattribute').html(JSON.parse(data).data.poor.povertyattribute)
-            $('#mainpovertyreason').html(JSON.parse(data).data.poor.mainpovertyreason)
-            */
             
+            if (JSON.parse(data).data.dutys[0].icon) {
+                $('.photo .unit').append(`
+                    <img id="personal" src='${JSON.parse(data).data.dutys[0].icon}'>
+                `)
+                app.showSingleImg('#personal', JSON.parse(data).data.dutys[0].icon)
+            }
+
+            if (JSON.parse(data).data.dutys[0].photo) {
+                $('.photo .unit').append(`
+                    <img id="together" src='${JSON.parse(data).data.dutys[0].photo}'>
+                `)
+                app.showSingleImg('#together', JSON.parse(data).data.dutys[0].photo)
+            }
         }
     })
 })

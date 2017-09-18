@@ -31,24 +31,90 @@ $(() => {
     app.setScreen()
     console.log(app.getUrlPrama('table_id'))
 
-    $.ajax({
-        url: 'http://test.360guanggu.com/fupingv1/api.php/Macro/poorDetail',
-        type: 'POST',
-        data: `table_id=${app.getUrlPrama('table_id')}`,
-        success: (data) => {
-            console.log(JSON.parse(data).data)
-            
-            $('#name').html(JSON.parse(data).data.poor.name)
-            $('#area').html(JSON.parse(data).data.poor.townname + '&nbsp;' + JSON.parse(data).data.poor.villagename)
-            /*
-            $('#sex').html(JSON.parse(data).data.poor.sex)
-            $('#birthday').html(JSON.parse(data).data.poor.birthday)
-            $('#telephone') //暂缺
-            $('#idnumber').html(JSON.parse(data).data.poor.idnumber)
-            $('#homeaddress').html(JSON.parse(data).data.poor.homeaddress)
-            $('#povertyattribute').html(JSON.parse(data).data.poor.povertyattribute)
-            $('#mainpovertyreason').html(JSON.parse(data).data.poor.mainpovertyreason)
-            */
-        }
-    })
+    var getRecordList = () => {
+        
+                var prama = `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&table_id=${app.getUrlPrama('table_id')}`
+        
+                $.ajax({
+                    url: 'http://120.76.203.56:8002/api.php/Duty/poorDetail',
+                    type: 'POST',
+                    data: prama,
+                    success: (data) => {
+        
+                        console.log(JSON.parse(data).data)
+                    
+                        $('#name').html(JSON.parse(data).data.poor.name)
+                        $('#area').html(JSON.parse(data).data.poor.townname + '&nbsp;' + JSON.parse(data).data.poor.villagename)
+        
+                        $('.u-add').attr('href', `poordetail_add.html?table_id=${app.getUrlPrama('table_id')}&familyid=${JSON.parse(data).data.poor.familyid}`)
+                    
+                    }
+                })
+            }
+        
+            //按需加载
+            function needLoad(keyword, time) {
+        
+                var page = 0,
+                    prama = `uid=${localStorage.uid}&username=${localStorage.username}&password=${localStorage.password}&table_id=${app.getUrlPrama('table_id')}`,
+                    okeyword = `&keyword=${keyword}`,
+                    otime = `&time=${time}`
+        
+                if (keyword !== '') {
+                    prama += okeyword
+                }
+        
+                if (time !== '') {
+                    prama += otime
+                }
+        
+                $('.cont').dropload({
+                    scrollArea : window,
+                    loadDownFn : (me) => {
+                        page++
+                        var result = '',
+                            newPage =''
+                        newPage += `&page=${page}`
+                        console.log(prama + newPage)
+                        $.ajax({
+                            type: 'POST',
+                            url: 'http://120.76.203.56:8002/api.php/Duty/poorDetail',
+                            data: prama + newPage,
+                            dataType: 'json',
+                            success: function (data) {
+                                console.log(data)
+                                
+                                if (page === 1) {
+                                    app.showMsg(`总共有${data.data.records.count}条记录`)
+                                }
+                                
+                                var arrLen = data.data.records.datas.length
+                            
+                                if (arrLen > 0) {
+                                    for (var i = 0; i < arrLen; i++) {
+                                    result += `
+                                        <div class="list rcd">
+                                            <div class="unit record">${data.data.records.datas[i].content}</div>
+                                            <div class="unit date"><span>${data.data.records.datas[i].create_time}</span></div>
+                                        </div>`
+                                    }
+                                } else {
+                                    me.lock()
+                                    me.noData()
+                                }
+        
+                                $('.lists').append(result)
+                                me.resetload()
+                            },
+                            error: function (xhr, type) {
+                                me.resetload()
+                            }
+                        })
+                    }
+                })
+            }
+        
+        
+            getRecordList()
+            needLoad('', '')
 })
